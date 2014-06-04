@@ -35,7 +35,36 @@ describe Ship do
 			ship.place_vertically!
 			expect(ship).not_to be_horizontal
 		end
+
+		it "should occupy adjacent coordinates if horizontal" do 
+			a1 = Coordinate.new(1,1)
+			a1.hold(ship)
+			ship.extend_coordinates
+			expect(ship.locations[1].display).to eq "(1,2)"
+			expect(ship.locations[2].display).to eq "(1,3)"
+		end
+
+		it "should not occupy more coordinates than is length" do 
+			a1 = Coordinate.new(1,1)
+			a1.hold(ship)
+			ship.extend_coordinates
+			expect(ship.locations[1].display).to eq "(1,2)"
+			expect(ship.locations[2].display).to eq "(1,3)"
+			expect(ship.locations[3].display).to eq nil
+		end
+
+		it "should occupy adjacent coordinates if vertical" do 
+			a1 = Coordinate.new(1,1)
+			a1.hold(ship)
+			ship.place_vertically!
+			ship.extend_coordinates
+			expect(ship.locations[1].display).to eq "(2,1)"
+			expect(ship.locations[2].display).to eq "(3,1)"
+		end
+
+
 	end
+
 	context "knows" do 
 
 		before {A1 = double :A1, targeted?: true}

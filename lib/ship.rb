@@ -1,6 +1,7 @@
 class Ship
 
 	attr_accessor :length
+
 	
 	def initialize(length = 3)
 		@length = length
@@ -13,7 +14,6 @@ class Ship
 
 	def place_vertically!
 		@horizontal = false
-		self
 	end
 
 	def locations
@@ -28,32 +28,36 @@ class Ship
 		hit_locations.length == self.length
 	end
 
+	def extend_coordinates
+		1.upto(self.length - 1) do |index|
+			x = horizontal? ? locations[0].row : locations[0].column + index
+			y = horizontal? ? locations[0].row + index : locations[0].column 
+			locations << Coordinate.new(x, y)
+		end
+	end
 end
+
 
 class AircraftCarrier < Ship
 	def initialize
 		@length = 5
-		@horizontal = true
 	end
 end
 
 class Battleship < Ship
 	def initialize
 		@length = 4
-		@horizontal = true
 	end
 end
 
 class Destroyer < Ship
 	def initialize
 		@length = 3
-		@horizontal = true
 	end
 end
 
 class Tug < Ship
 	def initialize
 		@length = 2
-		@horizontal = true
 	end
 end

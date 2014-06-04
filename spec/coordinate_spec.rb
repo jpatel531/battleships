@@ -25,6 +25,10 @@ describe Coordinate do
 		expect(coordinate.column).to eq 2
 	end
 
+	it "can display a pretty version of itself" do 
+		expect(coordinate.display).to eq "(1,1)"
+	end
+
 	context "bla bla" do 
 
 	it "is added to a list of members of the Coordinate class" do

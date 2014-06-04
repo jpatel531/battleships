@@ -20,6 +20,10 @@ class Coordinate
 		@@existing_coordinates << self
 	end
 
+	def display
+		"(#{row},#{column})"
+	end
+
 	def convert(row)
 		row.to_i(27) - 9
 	end
@@ -40,7 +44,5 @@ class Coordinate
   def miss?
   	targeted? && !has_ship?
   end
-
-
 
 end
