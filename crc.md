@@ -6,6 +6,8 @@ Responsibilities:
 - Should have 5 ships
 - Should assign those 5 ships co-ordinates. 
 - Should call out shots on co-ordinates.
+- Has to assign coordinates according to the ship's length
+- For each ship, can only assign adjacent coordinates.
  
 Collaborators:
 
@@ -62,18 +64,18 @@ Collaborators:
 
 Responsibilities: 
 
-- Occupy location on grid.
-- Have certain lengths
-- Hit?
-- Sunk?
+- Have certain lengths. 
+- Has a fully defined location
+- Reports hits
+- Reports sinking
 
 Collaborators:
 
-- grid
+- coordinates
 - player
 
  
-4. Game
+<!-- 4. Game
 
 Responsibilities: 
 
@@ -89,5 +91,5 @@ Collaborators:
 
 - ship
 - grid (tracking grid and home grid)
-- player
+- player -->
 
