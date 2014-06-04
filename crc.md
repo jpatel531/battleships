@@ -52,6 +52,7 @@ Responsibilities:
 Responsibilities: 
 
 - Have a latitude and a longitude
+- knows when a ship is placed on the co-ordinate
 - Knows when a co-ordinate has been targeted
 
 Collaborators:
@@ -65,7 +66,7 @@ Collaborators:
 Responsibilities: 
 
 - Have certain lengths. 
-- Has a fully defined location
+- Has a fully defined location  
 - Reports hits
 - Reports sinking
 
