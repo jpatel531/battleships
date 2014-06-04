@@ -25,6 +25,16 @@ describe Coordinate do
 		expect(coordinate.column).to eq 2
 	end
 
+	context "bla bla" do 
+
+	it "is added to a list of members of the Coordinate class" do
+		Coordinate.existing_coordinates.clear
+		c4 = Coordinate.new("C", "4")
+		expect(Coordinate.existing_coordinates).to eq [c4]
+	end
+
+	end
+
 	context "interactions with ship" do  
 		let(:ship) {Ship.new}
 		let(:a1) {Coordinate.new(1,1)}
@@ -48,6 +58,20 @@ describe Coordinate do
 		a1 = Coordinate.new("A", "1")
 		a1.targeted = true
 		expect(a1).to be_targeted
+  end
+
+  it "knows when a ship is missed" do
+  	a1 = Coordinate.new(1,1)
+  	a1.targeted = true
+  	expect(a1).to be_miss
+  end
+
+  it "says a ship is not missed when it is hit" do
+  	a1 = Coordinate.new(1,1)
+    ship = Ship.new 
+  	a1.hold ship 
+  	a1.targeted = true
+  	expect(a1).not_to be_miss 
   end
 
 end
