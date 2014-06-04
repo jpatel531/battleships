@@ -25,14 +25,29 @@ describe Coordinate do
 		expect(coordinate.column).to eq 2
 	end
 
-	it "can have a ship" do
-		coordinate.hold("A1")
-		expect(ship.locations).to include? [A1]
+	context "interactions with ship" do  
+		let(:ship) {Ship.new}
+		let(:a1) {Coordinate.new(1,1)}
+		before(:each){a1.hold ship}
 
+		it "can hold a ship" do
+			expect(ship.locations).to include(a1)
+		end
+
+		it "confirms that a ship is present" do
+			expect(a1).to have_ship
+		end
+
+		it "confirms when a ship is not present" do
+			C3 = Coordinate.new("C", "3")
+			expect(C3).not_to have_ship
+		end
 	end
 
-	xit "knows when it's been targeted" do 
-		player = double :player, target_coordinate: coordinate.targeted = true
-		expect {player.target_coordinate}.to change{coordinate.targeted?}.from(false).to(true)
-	end
+	it "knows when it's been targeted" do
+		a1 = Coordinate.new("A", "1")
+		a1.targeted = true
+		expect(a1).to be_targeted
+  end
+
 end

@@ -1,9 +1,10 @@
 class Coordinate
 
 	attr_reader :row, :column
+	attr_writer :targeted
 
 	def initialize(row, column)
-		@targeted = false
+		@targeted, @has_ship = false, false
 		@row = (row.is_a? String) ? convert(row) : row
 		@column = column.to_i
 	end
@@ -17,7 +18,12 @@ class Coordinate
 	end
 
 	def hold(ship)
-		@locations << ship
+		ship.locations << self
+		@has_ship = true
 	end	
+
+	def has_ship?
+		@has_ship
+	end
 
 end
