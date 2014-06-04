@@ -3,11 +3,11 @@
 Responsibilities:
 
 <!-- - Should have a tracking grid and a home grid -->
-- Should have 5 ships
-- Should assign those 5 ships co-ordinates. 
-- Should call out shots on co-ordinates.
-- Has to assign coordinates according to the ship's length
-- For each ship, can only assign adjacent coordinates.
+- Should have 1 aircraft carrier, 1 battleship, 1 tug, 1 destroyer and 1 submarine
+- Should assign those 5 ships starting points.
+- Should assign ship orientation 
+- Should call out target co-ordinates.
+
  
 Collaborators:
 
