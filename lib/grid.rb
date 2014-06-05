@@ -1,17 +1,45 @@
-require 'matrix'
-
 class Grid
 
-	def build
-		Matrix.zero(10)
+	attr_reader :display
+
+	def initialize
+		@display = Array.new(10).map!{Array.new(10)}
 	end
 
-	# def draw_from(coordinate)
-	# 	coordinate.existing_coordinates.each do |location|
-	# 		# self.build.[](location.row - 1, location.column - 1 ) = 9 if location.has_ship?
-	# 		self.build.to_a[location.row - 1][location.column   "S" if location.has_ship?
-	# 	end
-	# end
+	def mark_ships_from(coordinates)
+		coordinates.existing_coordinates.each do |location|
+			display[location.row - 1][location.column - 1] = "S" if location.has_ship?
+		end
+	end
+
+	def mark_misses_from(coordinates)
+		coordinates.existing_coordinates.each do |location|
+			display[location.row - 1][location.column - 1] = "M" if location.miss?
+		end
+	end
+
+	
+
+	def mark_hits_to(player)
+		player.ships.each do |ship|
+			ship.hit_locations.each do |location|
+				display[location.row - 1][location.column - 1] = "H"
+			end
+		end
+	end
+
+	def mark_sinks_to(player)
+		player.ships.each do |ship|
+			ship.hit_locations.each do |location|
+				display[location.row - 1][location.column - 1] = ":(" if ship.sunk?
+			end
+		end
+	end
+
+	def pretty
+		puts grid.display.map(&:inspect)
+	end
+
 
 end
 

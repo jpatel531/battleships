@@ -18,16 +18,15 @@ Collaborators:
 #TrackingGrid
 
 
-
-
-
-<!-- 2. Grid
+2. Grid
 
 Responsibilities: 
 
-- Stores ships in specific locations
-- Declare hits, misses and sinks for all locations
+- Displays 10x10 matrix
+- Has two different coordinate systems, for each viewing-grid
+- Maps coordinates
 - Can hide ships
+- Grid gets automatically updated via coordinates 
 
 2.a. TrackingGrid < Grid
 
@@ -45,7 +44,7 @@ Responsibilities:
 
 - ship
 - player
- -->
+
 
 2. Co-ordinates
 

@@ -97,6 +97,12 @@ describe Player do
 			expect(carrier).to eq ["(1,1)", "(2,1)"]
 		end
 
+		# it "no longer has that ship after placing the ship" do 
+		# 	player.place("tug", "A1", "vertical")
+		# 	player.place("tug", "B6", "vertical")
+		# 	expect(player.tug.locations[2].original_string).not_to eq "B6"
+		# end
+
 		it "can target a coordinate that already exists" do 
 			coordinate = Coordinate.new("A","1")
 			player.target("A1")
