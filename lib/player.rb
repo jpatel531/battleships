@@ -24,7 +24,7 @@ class Player
 
 	def specified(coordinate)
 		column = coordinate[2].nil? ? coordinate[1] : "#{coordinate[1]}#{coordinate[2]}"
-		@specified = Coordinate.new(coordinate[0],column)
+		Coordinate.new(coordinate[0],column)
 	end
 
 	def set(ship, orientation)
@@ -39,8 +39,13 @@ class Player
 
 	def target(coordinate)
 		Coordinate.existing_coordinates.each do |location| 
-				location.targeted = true if location.original_string == coordinate
+				if location.original_string == coordinate
+					location.targeted = true
+				else
+					specified(coordinate).targeted = true
+				end
 		end
 	end
+
 
 end

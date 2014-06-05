@@ -94,6 +94,14 @@ describe Player do
 			player.target("A1")
 			expect(coordinate.targeted?).to be_true
 		end
+
+		it "can target a coordinate that doesn't exist" do 
+			Coordinate.existing_coordinates.clear
+			Coordinate.new("B", "2")
+			player.target("A1")
+			a1 = Coordinate.existing_coordinates.select {|location| location.original_string == "A1"}
+			expect(a1).not_to be_empty
+		end
 	
 	end
 
