@@ -32,7 +32,7 @@ describe Ship do
 
 		it "can be placed vertically" do
 			# player = double :player, place_vertically: 
-			ship.place_vertically!
+			ship.horizontal = false
 			expect(ship).not_to be_horizontal
 		end
 
@@ -56,10 +56,19 @@ describe Ship do
 		it "should occupy adjacent coordinates if vertical" do 
 			a1 = Coordinate.new(1,1)
 			a1.hold(ship)
-			ship.place_vertically!
+			ship.horizontal = false
 			ship.extend_coordinates
 			expect(ship.locations[1].display).to eq "(2,1)"
 			expect(ship.locations[2].display).to eq "(3,1)"
+		end
+
+		it "adjacent coordinates should also know they have a ship" do 
+			a1 = Coordinate.new(1,1)
+			a1.hold(ship)
+			ship.horizontal = false
+			ship.extend_coordinates
+			expect(ship.locations[1]).to have_ship
+			expect(ship.locations[2]).to have_ship
 		end
 
 

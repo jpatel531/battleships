@@ -1,6 +1,6 @@
 class Ship
 
-	attr_accessor :length
+	attr_accessor :length, :horizontal
 
 	
 	def initialize(length = 3)
@@ -12,9 +12,9 @@ class Ship
 		@horizontal
 	end
 
-	def place_vertically!
-		@horizontal = false
-	end
+	# def place_vertically!
+	# 	@horizontal = false
+	# end
 
 	def locations
 		@locations ||= []
@@ -34,5 +34,6 @@ class Ship
 			y = horizontal? ? locations[0].row + index : locations[0].column 
 			locations << Coordinate.new(x, y)
 		end
+		locations.each {|location| location.has_ship = true}
 	end
 end

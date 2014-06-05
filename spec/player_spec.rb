@@ -41,13 +41,25 @@ describe Player do
 	end
 	
 	context "playing the game" do
-		
-		it "can place a ship on the grid" do
-			
-			player.place_ship("aircraft_carrier","A1", "vertical")
-			expect(self.)
 
+		it "will choose the relevant ship by inputting a given string" do 
+			ship = "aircraftcarrier"
+			expect(player.choose(ship)).to eq(player.aircraftcarrier)
 		end
+
+		it "will choose the relevant ship by inputting a given string" do 
+			ship = "battleship"
+			expect(player.choose(ship)).to eq(player.battleship)
+		end
+		
+		it "will choose the relevant ship by inputting a given string" do 
+			ship = "submarine"
+			expect(player.choose(ship)).to eq(player.submarine)
+		end
+		# xit "can place a ship on the grid" do
+		# 	player.place_ship("aircraft_carrier","A1", "vertical")
+		# 	expect(self.)
+		# end
 	
 	end
 

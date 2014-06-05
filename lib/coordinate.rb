@@ -2,6 +2,7 @@ class Coordinate
 
 	attr_reader :row, :column
 	attr_writer :targeted
+	attr_accessor :has_ship
 
 	@@existing_coordinates ||= []
 
