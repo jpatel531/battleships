@@ -44,22 +44,56 @@ describe Player do
 
 		it "will choose the relevant ship by inputting a given string" do 
 			ship = "aircraftcarrier"
-			expect(player.choose(ship)).to eq(player.aircraftcarrier)
+			expect(player.chosen(ship)).to eq(player.aircraftcarrier)
 		end
 
 		it "will choose the relevant ship by inputting a given string" do 
 			ship = "battleship"
-			expect(player.choose(ship)).to eq(player.battleship)
+			expect(player.chosen(ship)).to eq(player.battleship)
 		end
 		
 		it "will choose the relevant ship by inputting a given string" do 
 			ship = "submarine"
-			expect(player.choose(ship)).to eq(player.submarine)
+			expect(player.chosen(ship)).to eq(player.submarine)
 		end
-		# xit "can place a ship on the grid" do
-		# 	player.place_ship("aircraft_carrier","A1", "vertical")
-		# 	expect(self.)
-		# end
+
+		it "should specify a starting coordinate" do
+			coordinate = "A1"
+			expect(player.specified(coordinate).display).to eq "(1,1)"
+		end
+
+		it "specifying A10 will display a coordinate (1,10)" do 
+			coordinate = "A10"
+			expect(player.specified(coordinate).display).to eq "(1,10)"
+		end
+			
+
+		it "should specify the vertical orientation" do
+			ship = player.submarine
+			orientation = "vertical"
+			player.set(ship, orientation)
+			expect(ship.horizontal?).to be_false
+		end
+
+		it "should specify the vertical orientation" do
+			ship = player.submarine
+			orientation = "horizontal"
+			player.set(ship, orientation)
+			expect(ship.horizontal?).to be_true
+		end
+
+		it "can place a ship on the grid" do
+			player.place("tug","A1", "vertical")
+			carrier = []
+			player.tug.locations.each {|location| carrier << location.display}
+			expect(carrier).to eq ["(1,1)", "(2,1)"]
+		end
+
+		it "can target a coordinate that already exists" do 
+			coordinate = Coordinate.new("A","1")
+			player.target("A1")
+			expect(coordinate.targeted?).to be_true
+		end
 	
 	end
 

@@ -12,10 +12,6 @@ class Ship
 		@horizontal
 	end
 
-	# def place_vertically!
-	# 	@horizontal = false
-	# end
-
 	def locations
 		@locations ||= []
 	end

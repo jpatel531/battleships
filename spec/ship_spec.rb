@@ -31,7 +31,6 @@ describe Ship do
 		end
 
 		it "can be placed vertically" do
-			# player = double :player, place_vertically: 
 			ship.horizontal = false
 			expect(ship).not_to be_horizontal
 		end

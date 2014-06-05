@@ -21,6 +21,14 @@ class Coordinate
 		@@existing_coordinates << self
 	end
 
+	def original_string
+		("A".."Z").to_a[self.row - 1] + self.column.to_s
+	end
+
+	def ==(other)
+		(self.row == other.row) && (self.column == other.column)
+	end
+
 	def display
 		"(#{row},#{column})"
 	end
