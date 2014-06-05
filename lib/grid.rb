@@ -18,8 +18,6 @@ class Grid
 		end
 	end
 
-	
-
 	def mark_hits_to(player)
 		player.ships.each do |ship|
 			ship.hit_locations.each do |location|
@@ -39,7 +37,6 @@ class Grid
 	def pretty
 		puts grid.display.map(&:inspect)
 	end
-
 
 end
 

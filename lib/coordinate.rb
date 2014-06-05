@@ -56,8 +56,8 @@ class Coordinate
 
 end
 
-class CoordinateSystem1 < Coordinate ; end
-class CoordinateSystem2  < Coordinate ; end
+class HomeCoordinate < Coordinate ; end
+class TrackingCoordinate  < Coordinate ; end
 
 
 

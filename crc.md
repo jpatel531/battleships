@@ -74,22 +74,32 @@ Collaborators:
 - coordinates
 - player
 
+
  
 <!-- 4. Game
 
 Responsibilities: 
 
 - When initialized, only has 2 players
-- Allows player to place ships on board.
+- Each player has a home grid and a tracking grid
+- Allows player to place ships on board with input
 - Allows a player to look at tracking grid
 - Allows a player to shoot at opponent's home grid
+- Updates tracking board
+- Player cannot place same ship twice
+
 - Reports victory
 - Is finished when one player wins.
 - Allows turns. If player hits, gets another go.
+-
 
-Collaborators:
+5. Rules
 
-- ship
-- grid (tracking grid and home grid)
-- player -->
+- A player cannot look at the other's home grid
+- Player cannot place same ship twice
+- Player cannot place a ship that's out of boundaries
+- Player cannot place a ship next to his other ship
+- Player cannot place a ship on his other ship
+
+
 
