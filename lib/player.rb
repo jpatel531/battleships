@@ -13,8 +13,8 @@ class Player
 		@destroyer = Destroyer.new
 		@submarine = Submarine.new
 		@tug = Tug.new
-		@home_grid = HomeGrid.new
-		@tracking_grid = TrackingGrid.new
+		@home_grid = Grid.new
+		@tracking_grid = Grid.new
 	end
 
 	def ships

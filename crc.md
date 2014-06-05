@@ -85,7 +85,7 @@ Responsibilities:
 - Allows player to place ships on board with input
 - Allows a player to look at tracking grid
 - Allows a player to shoot at opponent's home grid
-- Updates tracking board
+- Updates grids
 - Player cannot place same ship twice
 
 - Reports victory

@@ -40,10 +40,4 @@ class Grid
 
 end
 
-class HomeGrid < Grid
-end
-
-
-class TrackingGrid < Grid
-end
 
