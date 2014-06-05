@@ -55,3 +55,11 @@ class Coordinate
   end
 
 end
+
+class CoordinateSystem1 < Coordinate ; end
+class CoordinateSystem2  < Coordinate ; end
+
+
+
+
+

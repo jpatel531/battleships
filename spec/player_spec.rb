@@ -37,6 +37,14 @@ describe Player do
 		 	tug = lambda {|ship| ship.class == Tug}
 		 	expect(player.ships.select(&tug)).not_to be_empty
 		end
+
+		it "should have a home grid" do 
+			expect(player.home_grid).not_to be_nil
+		end
+
+		it "should have a tracking grid" do 
+			expect(player.tracking_grid).not_to be_nil
+		end
 	
 	end
 	

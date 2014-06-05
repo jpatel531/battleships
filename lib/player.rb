@@ -1,9 +1,10 @@
 require_relative 'ship'
 require_relative 'ship_types'
+require_relative 'grid'
 
 class Player
 
-	attr_reader :aircraftcarrier, :battleship, :destroyer, :submarine, :tug
+	attr_reader :aircraftcarrier, :battleship, :destroyer, :submarine, :tug, :home_grid, :tracking_grid
 
 	def initialize(name)
 		@name = name
@@ -12,6 +13,8 @@ class Player
 		@destroyer = Destroyer.new
 		@submarine = Submarine.new
 		@tug = Tug.new
+		@home_grid = HomeGrid.new
+		@tracking_grid = TrackingGrid.new
 	end
 
 	def ships
@@ -31,7 +34,7 @@ class Player
 		ship.horizontal = false if orientation == "vertical"
 	end
 
-	def place(ship, coordinate, orientation)
+	def place(ship, coordinate, orientation="horizontal")
 		set(chosen(ship), orientation)
 		specified(coordinate).hold chosen(ship)
 		chosen(ship).extend_coordinates
