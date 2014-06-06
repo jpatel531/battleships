@@ -1,8 +1,10 @@
 require_relative 'ship'
 require_relative 'ship_types'
-require_relative 'grid'
+# require_relative 'grid'
+
 
 class Player
+
 
 	attr_reader :aircraftcarrier, :battleship, :destroyer, :submarine, :tug, :defending_coordinates, :attacking_coordinates
 
@@ -15,13 +17,17 @@ class Player
 		@tug = Tug.new
 	end
 
-	def defending_coordinates
-		@defending_coordinates = (self == PLAYER1) ? Player1HomeCoordinate : Player2HomeCoordinate
-	end
+	require_relative 'game'
 
-	def attacking_coordinates
-		@attacking_coordinates = (self == PLAYER1) ? Player2HomeCoordinate : Player1HomeCoordinate
-	end
+	include Game
+
+	# def defending_coordinates
+	# 	@defending_coordinates = (self == PLAYER1) ? Player1HomeCoordinate : Player2HomeCoordinate
+	# end
+
+	# def attacking_coordinates
+	# 	@attacking_coordinates = (self == PLAYER1) ? Player2HomeCoordinate : Player1HomeCoordinate
+	# end
 
 	def ships
 		[aircraftcarrier, battleship, destroyer, submarine, tug]
@@ -56,6 +62,5 @@ class Player
 				end
 		end
 	end
-
 
 end

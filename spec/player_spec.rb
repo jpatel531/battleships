@@ -1,6 +1,6 @@
 require 'player'
 require 'coordinate'
-require 'game'
+# require 'game'
 
 describe Player do
 
