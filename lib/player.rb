@@ -4,7 +4,7 @@ require_relative 'grid'
 
 class Player
 
-	attr_reader :aircraftcarrier, :battleship, :destroyer, :submarine, :tug
+	attr_reader :aircraftcarrier, :battleship, :destroyer, :submarine, :tug, :defending_coordinates, :attacking_coordinates
 
 	def initialize(name)
 		@name = name
@@ -13,6 +13,14 @@ class Player
 		@destroyer = Destroyer.new
 		@submarine = Submarine.new
 		@tug = Tug.new
+	end
+
+	def defending_coordinates
+		@defending_coordinates = (self == PLAYER1) ? Player1HomeCoordinate : Player2HomeCoordinate
+	end
+
+	def attacking_coordinates
+		@attacking_coordinates = (self == PLAYER1) ? Player2HomeCoordinate : Player1HomeCoordinate
 	end
 
 	def ships
