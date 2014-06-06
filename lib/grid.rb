@@ -40,14 +40,6 @@ class Grid
 		end
 	end
 
-	# def mark_sinks_to(player)
-	# 	player.ships.each do |ship|
-	# 		ship.hit_locations.each do |location|
-	# 			display[location.row - 1][location.column - 1] = ":(" if ship.sunk?
-	# 		end
-	# 	end
-	# end
-
 	def pretty
 		puts self.display.map(&:inspect)
 	end
@@ -57,7 +49,6 @@ class Grid
 		mark_ships_of(defender) if viewer == defender
 		mark_misses_from(Coordinate)
 		mark_hits_to(defender)
-		# mark_sinks_to(defender)
 		pretty
 	end
 end

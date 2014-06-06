@@ -1,5 +1,3 @@
-# require_relative 'player'
-
 module Game
 
 	require_relative 'player'

@@ -36,15 +36,6 @@ describe Grid do
 		expect(grid.display[0][0]).to eq "M"
 	end
 
-	# it "can mark sunken ships" do 
-	# 	player.place("destroyer", "A1")
-	# 	opponent.target("A1") ; opponent.target("A2") ; opponent.target("A3")
-	# 	grid.mark_sinks_to player
-	# 	expect(grid.display[0][0]).to eq ":("
-	# 	expect(grid.display[0][1]).to eq ":("
-	# 	expect(grid.display[0][2]).to eq ":("
-	# end
-
 context "the conditional viewer" do 
 	let(:home_grid) {Player1HomeGrid.new}
 	before(:each) { Coordinate.existing_coordinates.clear
@@ -71,17 +62,7 @@ context "the conditional viewer" do
 		expect(home_grid.display[0][0]).to eq "H"
 	end
 
-	# it "both player 1 and player 2 can see player 1's sunken ships" do 
-	# 	PLAYER2.target("A1") ; PLAYER2.target("A2") ; PLAYER2.target("A3") 
-	# 	home_grid.update_for(PLAYER1)
-	# 	expect(home_grid.display[0][0]).to eq ":("
-	# 	expect(home_grid.display[0][1]).to eq ":("
-	# 	expect(home_grid.display[0][2]).to eq ":("
-	# 	home_grid.update_for(PLAYER2)
-	# 	expect(home_grid.display[0][0]).to eq ":("
-	# 	expect(home_grid.display[0][1]).to eq ":("
-	# 	expect(home_grid.display[0][2]).to eq ":("
-	# end
+
 
 end
 

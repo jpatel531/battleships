@@ -29,11 +29,6 @@ describe Coordinate do
 		expect(coordinate.display).to eq "(1,1)"
 	end
 
-	it "a coordinate with a reference A1 is equal to another coordinate with reference A1" do 
-		a = Coordinate.new("A","1")
-		b = Coordinate.new("A","1")
-		expect(a == b).to be_true
-	end
 
 	context "bla bla" do 
 
