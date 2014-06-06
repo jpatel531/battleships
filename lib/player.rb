@@ -16,7 +16,7 @@ class Player
 	end
 
 	def ships
-			[aircraftcarrier, battleship, destroyer, submarine, tug]
+		[aircraftcarrier, battleship, destroyer, submarine, tug]
 	end
 
 	def chosen(ship)
@@ -25,7 +25,8 @@ class Player
 
 	def specified(coordinate)
 		column = coordinate[2].nil? ? coordinate[1] : "#{coordinate[1]}#{coordinate[2]}"
-		Coordinate.new(coordinate[0],column)
+		Coordinate.new(coordinate[0],column) 
+
 	end
 
 	def set(ship, orientation)

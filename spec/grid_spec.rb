@@ -4,9 +4,9 @@ require 'game'
 include Game
 
 describe Grid do 
-	let(:grid) {Grid.new}
-	let(:player) {Player.new("jamie")}
-	let(:opponent) {Player.new("steve")}
+	let(:grid) {Player1HomeGrid.new}
+	let(:player) {PLAYER1}
+	let(:opponent) {PLAYER2}
 
 	it "is built as an array" do 
 		expect(grid.display).to be_kind_of(Array)
@@ -19,22 +19,23 @@ describe Grid do
 
 	it "can show where a ship has been placed" do 
 		player.place("destroyer", "A1")
-		grid.mark_ships_of(player)
+		grid.mark_ships
 		expect(grid.display[0][0]).to eq "S"
 	end
 
 	it "can show where a ship has been hit" do 
 		player.place("destroyer", "A1")
 		opponent.target("A1")
-		grid.mark_hits_to player
+		grid.mark_hits
 		expect(grid.display[0][0]).to eq "H"
 	end
 
 	it "can show where a player has hit sea" do 
 		player.target("A1")
-		grid.mark_misses_from(Coordinate)
+		grid.mark_misses
 		expect(grid.display[0][0]).to eq "M"
 	end
+
 
 context "the conditional viewer" do 
 	let(:home_grid) {Player1HomeGrid.new}
@@ -42,7 +43,7 @@ context "the conditional viewer" do
 		PLAYER1.place("destroyer", "A1")}
 
 	it "player 2 cannot see the ships of player 1's home grid" do 
-		home_grid.update_for(PLAYER2)
+		grid.update_for(PLAYER2)
 		expect(home_grid.display[0][0]).to be_nil
 	end
 
