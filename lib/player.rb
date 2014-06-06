@@ -1,5 +1,6 @@
 require_relative 'ship'
 require_relative 'ship_types'
+require_relative 'coordinate'
 # require_relative 'grid'
 
 
@@ -8,26 +9,16 @@ class Player
 
 	attr_reader :aircraftcarrier, :battleship, :destroyer, :submarine, :tug, :defending_coordinates, :attacking_coordinates
 
-	def initialize(name)
+	def initialize(name, player1 = true)
 		@name = name
 		@aircraftcarrier = AircraftCarrier.new
 		@battleship = Battleship.new
 		@destroyer = Destroyer.new
 		@submarine = Submarine.new
 		@tug = Tug.new
+		@defending_coordinates = (player1 == true) ? Player1HomeCoordinate : Player2HomeCoordinate
+		@attacking_coordinates = (player1 == true) ? Player2HomeCoordinate : Player1HomeCoordinate
 	end
-
-	require_relative 'game'
-
-	include Game
-
-	# def defending_coordinates
-	# 	@defending_coordinates = (self == PLAYER1) ? Player1HomeCoordinate : Player2HomeCoordinate
-	# end
-
-	# def attacking_coordinates
-	# 	@attacking_coordinates = (self == PLAYER1) ? Player2HomeCoordinate : Player1HomeCoordinate
-	# end
 
 	def ships
 		[aircraftcarrier, battleship, destroyer, submarine, tug]
@@ -40,7 +31,6 @@ class Player
 	def specified(coordinate)
 		column = coordinate[2].nil? ? coordinate[1] : "#{coordinate[1]}#{coordinate[2]}"
 		Coordinate.new(coordinate[0],column) 
-
 	end
 
 	def set(ship, orientation)

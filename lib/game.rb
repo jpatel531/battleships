@@ -2,7 +2,7 @@
 
 module Game
 
-	PLAYER1 = Player.new("Jamie")
-	PLAYER2 = Player.new("Will")
+	PLAYER1 = Player.new("Jamie", true)
+	PLAYER2 = Player.new("Will", false)
 
 end

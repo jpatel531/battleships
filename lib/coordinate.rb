@@ -52,11 +52,11 @@ class Coordinate
 
 end
 
-# class Player1HomeCoordinate < Coordinate
-# end
+class Player1HomeCoordinate < Coordinate
+end
 
-# class Player2HomeCoordinate < Coordinate
-# end
+class Player2HomeCoordinate < Coordinate
+end
 
 
 
