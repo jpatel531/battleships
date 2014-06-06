@@ -1,5 +1,6 @@
 require 'player'
 require 'coordinate'
+require 'game'
 
 describe Player do
 
@@ -39,13 +40,13 @@ describe Player do
 		 	expect(player.ships.select(&tug)).not_to be_empty
 		end
 
-		it "should have a home grid" do 
-			expect(player.home_grid).not_to be_nil
-		end
+		# it "should have a home grid" do 
+		# 	expect(player.home_grid).not_to be_nil
+		# end
 
-		it "should have a tracking grid" do 
-			expect(player.tracking_grid).not_to be_nil
-		end
+		# it "should have a tracking grid" do 
+		# 	expect(player.tracking_grid).not_to be_nil
+		# end
 	
 	end
 	
@@ -105,16 +106,16 @@ describe Player do
 		# end
 
 		it "can target a coordinate that already exists" do 
-			coordinate = TrackingCoordinate.new("A","1")
+			coordinate = Coordinate.new("A","1")
 			player.target("A1")
 			expect(coordinate.targeted?).to be_true
 		end
 
 		it "can target a coordinate that doesn't exist" do 
-			TrackingCoordinate.existing_coordinates.clear
-			TrackingCoordinate.new("B", "2")
+			Coordinate.existing_coordinates.clear
+			Coordinate.new("B", "2")
 			player.target("A1")
-			a1 = TrackingCoordinate.existing_coordinates.select {|location| location.original_string == "A1"}
+			a1 = Coordinate.existing_coordinates.select {|location| location.original_string == "A1"}
 			expect(a1).not_to be_empty
 		end
 	

@@ -56,9 +56,11 @@ class Coordinate
 
 end
 
-class HomeCoordinate < Coordinate ; end
-class TrackingCoordinate  < Coordinate ; end
+# class Player1HomeCoordinate < Coordinate
+# end
 
+# class Player2HomeCoordinate < Coordinate
+# end
 
 
 

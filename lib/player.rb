@@ -13,9 +13,11 @@ class Player
 		@destroyer = Destroyer.new
 		@submarine = Submarine.new
 		@tug = Tug.new
-		@home_grid = Grid.new
-		@tracking_grid = Grid.new
+		# @home_grid = Grid.new
+		# @tracking_grid = Grid.new
 	end
+
+	
 
 	def ships
 			[aircraftcarrier, battleship, destroyer, submarine, tug]
@@ -27,7 +29,7 @@ class Player
 
 	def specified(coordinate)
 		column = coordinate[2].nil? ? coordinate[1] : "#{coordinate[1]}#{coordinate[2]}"
-		HomeCoordinate.new(coordinate[0],column)
+		Coordinate.new(coordinate[0],column)
 	end
 
 	def set(ship, orientation)
@@ -41,7 +43,7 @@ class Player
 	end
 
 	def target(coordinate)
-		TrackingCoordinate.existing_coordinates.each do |location| 
+		Coordinate.existing_coordinates.each do |location| 
 				if location.original_string == coordinate
 					location.targeted = true
 				else

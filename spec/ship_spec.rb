@@ -36,7 +36,7 @@ describe Ship do
 		end
 
 		it "should occupy adjacent coordinates if horizontal" do 
-			a1 = HomeCoordinate.new(1,1)
+			a1 = Coordinate.new(1,1)
 			a1.hold(ship)
 			ship.extend_coordinates
 			expect(ship.locations[1].display).to eq "(1,2)"
@@ -53,7 +53,7 @@ describe Ship do
 		end
 
 		it "should occupy adjacent coordinates if vertical" do 
-			a1 = HomeCoordinate.new(1,1)
+			a1 = Coordinate.new(1,1)
 			a1.hold(ship)
 			ship.horizontal = false
 			ship.extend_coordinates
@@ -62,7 +62,7 @@ describe Ship do
 		end
 
 		it "adjacent coordinates should also know they have a ship" do 
-			a1 = HomeCoordinate.new(1,1)
+			a1 = Coordinate.new(1,1)
 			a1.hold(ship)
 			ship.horizontal = false
 			ship.extend_coordinates

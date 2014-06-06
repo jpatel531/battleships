@@ -1,0 +1,21 @@
+- Grid
+
+- Player 1's Perspective
+
+	 - marking ships ==> player1.home_grid.mark_ships_from(player1)
+
+	 - marking misses ==> player1.home_grid.mark_misses_from(Coordinates)
+
+	 - marking hits ==> player1.home_grid.mark_hits_to(player1)
+
+	 - marking sinks ==> player1.home_grid.mark_sinks_to(player1)
+
+
+- Player 2's Perspective
+
+	 - marking misses ==> player1.home_grid.mark_misses_from(Coordinates)
+
+	 - marking hits ==> player1.home_grid.mark_hits_to(player1)
+
+	 - marking sinks ==> player1.home_grid.mark_sinks_to(player1)
+
