@@ -43,6 +43,7 @@ class Player
 
 	def place(ship, coordinate, orientation="horizontal")
 		set(chosen(ship), orientation)
+		chosen(ship).defending_coordinates = self.defending_coordinates
 		specified(coordinate).hold chosen(ship)
 		chosen(ship).extend_coordinates
 	end

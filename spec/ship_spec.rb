@@ -2,6 +2,7 @@ require 'ship'
 
 describe Ship do 
 	let(:ship) {Ship.new() }
+	let(:player) {Player.new("Jamie")}
 
 
 	context "when initialized" do 
@@ -36,38 +37,29 @@ describe Ship do
 		end
 
 		it "should occupy adjacent coordinates if horizontal" do 
-			a1 = Coordinate.new(1,1)
-			a1.hold(ship)
-			ship.extend_coordinates
-			expect(ship.locations[1].display).to eq "(1,2)"
-			expect(ship.locations[2].display).to eq "(1,3)"
+			player.place("destroyer", "A1")
+			expect(player.destroyer.locations[1].display).to eq "(1,2)"
+			expect(player.destroyer.locations[2].display).to eq "(1,3)"
 		end
 
 		it "should not occupy more coordinates than is length" do 
-			a1 = Coordinate.new(1,1)
-			a1.hold(ship)
-			ship.extend_coordinates
-			expect(ship.locations[1].display).to eq "(1,2)"
-			expect(ship.locations[2].display).to eq "(1,3)"
-			expect(ship.locations[3].display).to eq nil
+			player.place("destroyer", "A1")
+			expect(player.destroyer.locations[1].display).to eq "(1,2)"
+			expect(player.destroyer.locations[2].display).to eq "(1,3)"
+			expect(player.destroyer.locations[3].display).to eq nil
 		end
 
 		it "should occupy adjacent coordinates if vertical" do 
-			a1 = Coordinate.new(1,1)
-			a1.hold(ship)
-			ship.horizontal = false
-			ship.extend_coordinates
-			expect(ship.locations[1].display).to eq "(2,1)"
-			expect(ship.locations[2].display).to eq "(3,1)"
+			player.place("destroyer", "A1", "vertical")
+			expect(player.destroyer.locations[1].display).to eq "(2,1)"
+			expect(player.destroyer.locations[2].display).to eq "(3,1)"
+			expect(player.destroyer.locations[3].display).to eq nil
 		end
 
 		it "adjacent coordinates should also know they have a ship" do 
-			a1 = Coordinate.new(1,1)
-			a1.hold(ship)
-			ship.horizontal = false
-			ship.extend_coordinates
-			expect(ship.locations[1]).to have_ship
-			expect(ship.locations[2]).to have_ship
+			player.place("destroyer", "A1")
+			expect(player.destroyer.locations[1]).to have_ship
+			expect(player.destroyer.locations[2]).to have_ship
 		end
 
 
