@@ -28,9 +28,13 @@ class Player
 		instance_variable_get("@"+ship)
 	end
 
-	def specified(coordinate)
+	def specified(coordinate, status=:defending)
 		column = coordinate[2].nil? ? coordinate[1] : "#{coordinate[1]}#{coordinate[2]}"
-		Coordinate.new(coordinate[0],column) 
+		if status == :attacking
+			attacking_coordinates.new(coordinate[0],column) if status == :attacking
+		else
+			defending_coordinates.new(coordinate[0],column) if status == :defending
+		end
 	end
 
 	def set(ship, orientation)
@@ -44,11 +48,11 @@ class Player
 	end
 
 	def target(coordinate)
-		Coordinate.existing_coordinates.each do |location| 
+		attacking_coordinates.existing_coordinates.each do |location| 
 				if location.original_string == coordinate
 					location.targeted = true
 				else
-					specified(coordinate).targeted = true
+					specified(coordinate, :attacking).targeted = true
 				end
 		end
 	end
