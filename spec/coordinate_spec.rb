@@ -1,7 +1,8 @@
 require 'coordinate'
+require 'game'
 
 describe Coordinate do 
-	let(:coordinate) {Coordinate.new("a","1")}
+	let(:coordinate) {Player1HomeCoordinate.new("a","1")}
 	let(:ship) {Ship.new}
 
 	it "is untargeted when initialized" do 
@@ -14,13 +15,13 @@ describe Coordinate do
 	end
 
 	it "B1 has a row value of 2 and column 1" do
-		coordinate = Coordinate.new("B", "1")
+		coordinate = Player1HomeCoordinate.new("B", "1")
 		expect(coordinate.row).to eq 2
 		expect(coordinate.column).to eq 1
 	end
 
 	it "can pass in numbers when initialized" do
-		coordinate = Coordinate.new(1,2) 
+		coordinate = Player1HomeCoordinate.new(1,2) 
 		expect(coordinate.row).to eq 1
 		expect(coordinate.column).to eq 2
 	end
@@ -33,16 +34,16 @@ describe Coordinate do
 	context "bla bla" do 
 
 	it "is added to a list of members of the Coordinate class" do
-		Coordinate.existing_coordinates.clear
-		c4 = Coordinate.new("C", "4")
-		expect(Coordinate.existing_coordinates).to eq [c4]
+		Player1HomeCoordinate.existing_coordinates.clear
+		c4 = Player1HomeCoordinate.new("C", "4")
+		expect(Player1HomeCoordinate.existing_coordinates).to eq [c4]
 	end
 
 	end
 
 	context "interactions with ship" do  
 		let(:ship) {Ship.new}
-		let(:a1) {Coordinate.new(1,1)}
+		let(:a1) {Player1HomeCoordinate.new(1,1)}
 		before(:each){a1.hold ship}
 
 		it "can hold a ship" do
@@ -54,29 +55,41 @@ describe Coordinate do
 		end
 
 		it "confirms when a ship is not present" do
-			C3 = Coordinate.new("C", "3")
+			C3 = Player1HomeCoordinate.new("C", "3")
 			expect(C3).not_to have_ship
 		end
 	end
 
 	it "knows when it's been targeted" do
-		a1 = Coordinate.new("A", "1")
+		a1 = Player1HomeCoordinate.new("A", "1")
 		a1.targeted = true
 		expect(a1).to be_targeted
   end
 
   it "knows when a ship is missed" do
-  	a1 = Coordinate.new(1,1)
+  	a1 = Player1HomeCoordinate.new(1,1)
   	a1.targeted = true
   	expect(a1).to be_miss
   end
 
   it "says a ship is not missed when it is hit" do
-  	a1 = Coordinate.new(1,1)
+  	a1 = Player1HomeCoordinate.new(1,1)
     ship = Ship.new 
   	a1.hold ship 
   	a1.targeted = true
   	expect(a1).not_to be_miss 
+  end
+
+  context "Coordinate subclasses" do 
+
+  	it "only register members of its own class in the existing_coordinates array" do 
+  			PLAYER1.place("destroyer", "A1")
+  			PLAYER2.place("aircraftcarrier", "E2")
+  			other_class = lambda {|location| location.is_a? Player1HomeCoordinate}
+  			other_class_members = Player2HomeCoordinate.existing_coordinates.select(&other_class)
+  			expect(other_class_members).to be_empty
+  	end
+
   end
 
 end

@@ -8,7 +8,6 @@ class Grid
 
 	def initialize
 		@display = Array.new(10).map!{Array.new(10)}
-		@coordinate_system = Coordinate
 	end
 
 	def mark_ships
@@ -59,6 +58,7 @@ class Player1HomeGrid < Grid
 		super
 		@defender = PLAYER1
 		@attacker = PLAYER2
+		@coordinate_system = Player1HomeCoordinate
 	end
 end
 
@@ -67,6 +67,7 @@ class Player2HomeGrid < Grid
 		super
 		@defender = PLAYER2
 		@attacker = PLAYER1
+		@coordinate_system = Player2HomeCoordinate
 	end
 end
 

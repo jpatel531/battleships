@@ -1,24 +1,30 @@
-class Coordinate
+module Coordinate
 
 	attr_reader :row, :column
 	attr_writer :targeted
 	attr_accessor :has_ship
 
-	@@existing_coordinates ||= []
-
-	def self.existing_coordinates
-		@@existing_coordinates
+	def self.included(base)
+			base.extend ClassMethods
 	end
 
-	def self.existing_coordinates=(value)
-		@@existing_coordinates = value
+	module ClassMethods
+
+		def existing_coordinates
+			@existing_coordinates ||= []
+		end
+
+		def existing_coordinates=(value)
+			@existing_coordinates = value
+		end
+
 	end
 
 	def initialize(row, column)
 		@targeted, @has_ship = false, false
 		@row = (row.is_a? String) ? convert(row) : row
 		@column = column.to_i
-		@@existing_coordinates << self
+		self.class.existing_coordinates << self
 	end
 
 	def original_string
@@ -52,10 +58,16 @@ class Coordinate
 
 end
 
-class Player1HomeCoordinate < Coordinate
+class Player1HomeCoordinate
+
+	include Coordinate
+
 end
 
-class Player2HomeCoordinate < Coordinate
+class Player2HomeCoordinate
+
+	include Coordinate
+
 end
 
 

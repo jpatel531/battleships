@@ -4,7 +4,7 @@ require 'coordinate'
 
 describe Player do
 
-	let (:player) {Player.new("Tron")}
+	let (:player) {Player.new("Tron")	}
 
 	context "when initialized" do
 
@@ -98,16 +98,16 @@ describe Player do
 		# end
 
 		it "can target a coordinate that already exists" do 
-			coordinate = Coordinate.new("A","1")
+			coordinate = Player2HomeCoordinate.new("A","1")
 			player.target("A1")
 			expect(coordinate.targeted?).to be_true
 		end
 
 		it "can target a coordinate that doesn't exist" do 
-			Coordinate.existing_coordinates.clear
-			Coordinate.new("B", "2")
+			Player2HomeCoordinate.existing_coordinates.clear
+			Player2HomeCoordinate.new("B", "2")
 			player.target("A1")
-			a1 = Coordinate.existing_coordinates.select {|location| location.original_string == "A1"}
+			a1 = Player2HomeCoordinate.existing_coordinates.select {|location| location.original_string == "A1"}
 			expect(a1).not_to be_empty
 		end
 	

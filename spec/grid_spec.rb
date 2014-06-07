@@ -21,6 +21,8 @@ describe Grid do
 		player.place("destroyer", "A1")
 		grid.mark_ships
 		expect(grid.display[0][0]).to eq "S"
+		expect(grid.display[0][1]).to eq "S"
+		expect(grid.display[0][2]).to eq "S"
 	end
 
 	it "can show where a ship has been hit" do 
@@ -37,33 +39,58 @@ describe Grid do
 	end
 
 
-context "the conditional viewer" do 
-	let(:home_grid) {Player1HomeGrid.new}
-	before(:each) { Coordinate.existing_coordinates.clear
-		PLAYER1.place("destroyer", "A1")}
+	context "the conditional viewer: Player 1's Home Grid" do 
+		let(:home_grid) {Player1HomeGrid.new}
+		before(:each) { Player1HomeCoordinate.existing_coordinates.clear
+			PLAYER1.place("destroyer", "A1")}
 
-	it "player 2 cannot see the ships of player 1's home grid" do 
-		grid.update_for(PLAYER2)
-		expect(home_grid.display[0][0]).to be_nil
+		it "player 2 cannot see the ships of player 1's home grid" do 
+			grid.update_for(PLAYER2)
+			expect(home_grid.display[0][0]).to be_nil
+		end
+
+		it "both player 1 and player 2 can see player 2's misses" do 
+			PLAYER2.target("E8")
+			home_grid.update_for(PLAYER1)
+			expect(home_grid.display[4][7]).to eq "M"
+			home_grid.update_for(PLAYER2)
+			expect(home_grid.display[4][7]).to eq "M"
+		end
+
+		it "both player 1 and player 2 can see player 1's hit ships" do 
+			PLAYER2.target("A1")
+			home_grid.update_for(PLAYER1)
+			expect(home_grid.display[0][0]).to eq "H"
+			home_grid.update_for(PLAYER2)
+			expect(home_grid.display[0][0]).to eq "H"
+		end
 	end
 
-	it "both player 1 and player 2 can see player 2's misses" do 
-		PLAYER2.target("E8")
-		home_grid.update_for(PLAYER1)
-		expect(home_grid.display[4][7]).to eq "M"
-		home_grid.update_for(PLAYER2)
-		expect(home_grid.display[4][7]).to eq "M"
-	end
+	context "the conditional viewer: Player 2's Home Grid" do  
+		let(:home_grid) {Player2HomeGrid.new}
+		before(:each) {Player2HomeCoordinate.existing_coordinates.clear
+									PLAYER2.place("destroyer", "A1")}
 
-	it "both player 1 and player 2 can see player 1's hit ships" do 
-		PLAYER2.target("A1")
-		home_grid.update_for(PLAYER1)
-		expect(home_grid.display[0][0]).to eq "H"
-		home_grid.update_for(PLAYER2)
-		expect(home_grid.display[0][0]).to eq "H"
-	end
+		it "player 1 cannot see the ships of player 2's home grid" do 
+			grid.update_for(PLAYER1)
+			expect(home_grid.display[0][0]).to be_nil
+		end
 
+		it "both player 1 and player 2 can see player 1's misses" do 
+			PLAYER1.target("E8")
+			home_grid.update_for(PLAYER1)
+			expect(home_grid.display[4][7]).to eq "M"
+			home_grid.update_for(PLAYER2)
+			expect(home_grid.display[4][7]).to eq "M"
+		end
 
+		it "both player 1 and player 2 can see player 2's hit ships" do 
+			PLAYER1.target("A1")
+			home_grid.update_for(PLAYER2)
+			expect(home_grid.display[0][0]).to eq "H"
+			home_grid.update_for(PLAYER1)
+			expect(home_grid.display[0][0]).to eq "H"
+		end
 
 end
 
