@@ -1,23 +1,15 @@
+require_relative 'coordinate_tracker'
+
 module Coordinate
+
+	include CoordinateTracker
 
 	attr_reader :row, :column
 	attr_writer :targeted
 	attr_accessor :has_ship
 
 	def self.included(base)
-			base.extend ClassMethods
-	end
-
-	module ClassMethods
-
-		def existing_coordinates
-			@existing_coordinates ||= []
-		end
-
-		def existing_coordinates=(value)
-			@existing_coordinates = value
-		end
-
+			base.extend CoordinateTracker
 	end
 
 	def initialize(row, column)
@@ -58,17 +50,8 @@ module Coordinate
 
 end
 
-class Player1HomeCoordinate
-
-	include Coordinate
-
-end
-
-class Player2HomeCoordinate
-
-	include Coordinate
-
-end
+class Player1HomeCoordinate; include Coordinate ; end
+class Player2HomeCoordinate; include Coordinate ; end
 
 
 
