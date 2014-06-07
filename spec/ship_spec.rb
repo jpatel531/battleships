@@ -62,7 +62,13 @@ describe Ship do
 			expect(player.destroyer.locations[2]).to have_ship
 		end
 
-
+		it "an aircraftcarrier starting on E4 will have the appropriate coordinates" do 
+			player.place("aircraftcarrier","E4")
+			expect(player.aircraftcarrier.locations[1].display).to eq "(5,5)"
+			expect(player.aircraftcarrier.locations[2].display).to eq "(5,6)"
+			expect(player.aircraftcarrier.locations[3].display).to eq "(5,7)"
+			expect(player.aircraftcarrier.locations[4].display).to eq "(5,8)"
+		end
 	end
 
 	context "knows" do 

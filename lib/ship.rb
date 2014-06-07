@@ -26,8 +26,8 @@ class Ship
 
 	def extend_coordinates
 		1.upto(self.length - 1) do |index|
-			x = horizontal? ? locations[0].row : locations[0].column + index
-			y = horizontal? ? locations[0].row + index : locations[0].column 
+			x = horizontal? ? locations[0].row : locations[0].row + index
+			y = horizontal? ? locations[0].column + index : locations[0].column 
 			locations << defending_coordinates.new(x, y)
 		end
 		locations.each {|location| location.has_ship = true}
