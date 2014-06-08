@@ -81,10 +81,11 @@ describe Coordinate do
   end
 
   context "Coordinate subclasses" do 
+  	let(:game) {Game.new}
 
   	it "only register members of its own class in the existing_coordinates array" do 
-  			PLAYER1.place("destroyer", "A1")
-  			PLAYER2.place("aircraftcarrier", "E2")
+  			game.player1.place("destroyer", "A1")
+  			game.player2.place("aircraftcarrier", "E2")
   			other_class = lambda {|location| location.is_a? Player1HomeCoordinate}
   			other_class_members = Player2HomeCoordinate.existing_coordinates.select(&other_class)
   			expect(other_class_members).to be_empty

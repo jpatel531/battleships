@@ -4,7 +4,8 @@ class Grid
 
 	attr_reader :display, :defender, :coordinate_system
 
-	def initialize
+	def initialize(defender)
+		@defender = defender
 		@display = Array.new(10).map!{Array.new(10)}
 	end
 
@@ -54,7 +55,6 @@ end
 class Player1HomeGrid < Grid 
 	def initialize(defender)
 		super
-		@defender = defender
 		@coordinate_system = Player1HomeCoordinate
 	end
 end
@@ -62,7 +62,6 @@ end
 class Player2HomeGrid < Grid
 	def initialize(defender)
 		super
-		@defender = defender
 		@coordinate_system = Player2HomeCoordinate
 	end
 end

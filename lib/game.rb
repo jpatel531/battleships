@@ -1,21 +1,5 @@
-	require_relative 'player'
-
-# module Initializer
-
-# 	# PLAYER1 = Player.new(get_name, true)
-# 	# PLAYER2 = Player.new(get_name, false)
-
-# 	def get_name
-# 		STDIN.gets.chomp
-# 	end
-
-# 	PLAYER1 = Player.new(get_name, true)
-# 	PLAYER2 = Player.new(get_name, false)
-
-# 	PLAYER1HOMEGRID = Player1HomeGrid.new
-# 	PLAYER2HOMEGRID = Player2HomeGrid.new
-
-# end
+require_relative 'player'
+require_relative 'grid'
 
 class Game
 
