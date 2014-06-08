@@ -2,9 +2,7 @@ require_relative 'game'
 
 class Grid
 
-	include Game
-
-	attr_reader :display, :defender, :attacker, :coordinate_system
+	attr_reader :display, :defender, :coordinate_system
 
 	def initialize
 		@display = Array.new(10).map!{Array.new(10)}
@@ -54,19 +52,17 @@ class Grid
 end
 
 class Player1HomeGrid < Grid 
-	def initialize
+	def initialize(defender)
 		super
-		@defender = PLAYER1
-		@attacker = PLAYER2
+		@defender = defender
 		@coordinate_system = Player1HomeCoordinate
 	end
 end
 
 class Player2HomeGrid < Grid
-	def initialize
+	def initialize(defender)
 		super
-		@defender = PLAYER2
-		@attacker = PLAYER1
+		@defender = defender
 		@coordinate_system = Player2HomeCoordinate
 	end
 end

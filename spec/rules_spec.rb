@@ -1,12 +1,12 @@
 require 'grid'
-require 'game'
+require 'rules'
 
+include Rules
 
 describe Grid do 
-	let(:game) {Game.new}
-	let(:player) {game.player1}
-	let(:opponent) {game.player2}
-	let(:grid) {Player1HomeGrid.new(game.player1)}
+	let(:grid) {Player1HomeGrid.new}
+	let(:player) {PLAYER1}
+	let(:opponent) {PLAYER2}
 
 	context "when initialized" do
 
@@ -46,48 +46,45 @@ describe Grid do
 	end
 
 	describe "the conditional viewer" do 
-		let(:game) {Game.new}
-		let(:grid1) {game.player1_home_grid}
-		let(:grid2) {game.player2_home_grid}
-		let(:player) {game.player1}
-		let(:opponent) {game.player2}
+		let(:grid1) {Player1HomeGrid.new}
+		let(:grid2) {Player2HomeGrid.new}
 		before(:each) do
 			Player1HomeCoordinate.existing_coordinates.clear
-			player.place("destroyer", "A1")
+			PLAYER1.place("destroyer", "A1")
 			Player2HomeCoordinate.existing_coordinates.clear
-			opponent.place("destroyer", "A1")
+			PLAYER2.place("destroyer", "A1")
 		end
 
 
 		it "player 2 cannot see the ships of player 1's home grid" do 
-			grid1.update_for(opponent)
+			grid1.update_for(PLAYER2)
 			expect(grid1.display[0][0]).not_to eq "S"
-			grid2.update_for(player)
+			grid2.update_for(PLAYER1)
 			expect(grid2.display[0][0]).not_to eq "S"
 		end
 
 		it "both player 1 and player 2 can see player 2's misses" do 
-			player.target("E8") ; opponent.target("E8")
-			grid1.update_for(player)
+			PLAYER1.target("E8") ; PLAYER2.target("E8")
+			grid1.update_for(PLAYER1)
 			expect(grid1.display[4][7]).to eq "M"
-			grid1.update_for(opponent)
+			grid1.update_for(PLAYER2)
 			expect(grid1.display[4][7]).to eq "M"
-			grid2.update_for(player)
+			grid2.update_for(PLAYER1)
 			expect(grid2.display[4][7]).to eq "M"
-			grid2.update_for(opponent)
+			grid2.update_for(PLAYER2)
 			expect(grid2.display[4][7]).to eq "M"
 		end
 
 		it "both player 1 and player 2 can see player 1's hit ships" do 
-			player.target("A1")
-			opponent.target("A1")
-			grid1.update_for(player)
+			PLAYER1.target("A1")
+			PLAYER2.target("A1")
+			grid1.update_for(PLAYER1)
 			expect(grid1.display[0][0]).to eq "H"
-			grid1.update_for(opponent)
+			grid1.update_for(PLAYER2)
 			expect(grid1.display[0][0]).to eq "H"
-			grid2.update_for(opponent)
+			grid2.update_for(PLAYER2)
 			expect(grid2.display[0][0]).to eq "H"
-			grid2.update_for(player)
+			grid2.update_for(PLAYER1)
 			expect(grid2.display[0][0]).to eq "H"
 		end
 	end
