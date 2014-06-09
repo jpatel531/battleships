@@ -16,6 +16,10 @@ class Ship
 		@locations ||= []
 	end
 
+	def placed?
+		!locations.empty?
+	end
+
 	def hit_locations
 		locations.select {|location| location.targeted? }
 	end

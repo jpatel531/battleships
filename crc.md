@@ -82,7 +82,7 @@ Responsibilities:
 
 - When initialized, only has 2 players
 - Each player has a home grid and a tracking grid
-- Allows player to place ships on board with input
+- Allows player to place ships on board with input, then it's player 2's turn
 - Allows a player to look at tracking grid
 - Allows a player to shoot at opponent's home grid
 - Updates grids
@@ -97,6 +97,7 @@ Responsibilities:
 
 - A player cannot look at the other's home grid
 - Player cannot place same ship twice
+- Player cannot target same spot twice
 - Player cannot place a ship that's out of boundaries
 - Player cannot place a ship next to his other ship
 - Player cannot place a ship on his other ship

@@ -4,7 +4,7 @@ require_relative 'coordinate'
 
 class Player
 
-	attr_reader :aircraftcarrier, :battleship, :destroyer, :submarine, :tug, :defending_coordinates, :attacking_coordinates
+	attr_reader :name, :aircraftcarrier, :battleship, :destroyer, :submarine, :tug, :defending_coordinates, :attacking_coordinates
 
 	def initialize(name, player1 = true)
 		@name = name

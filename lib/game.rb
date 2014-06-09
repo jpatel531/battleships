@@ -12,5 +12,32 @@ class Game
 		@player2_home_grid = Player2HomeGrid.new(player2)
 	end
 
+	def input
+		STDIN.gets.chomp
+	end
+
+	def place_ship(player)
+		puts "Which ship would you like to place?"
+		ship = input
+		puts "Where would you like to place it?"
+		coordinate = input
+		puts "horizontal or vertical orientation?"
+		orientation = input
+		player.place(ship, coordinate, orientation)
+	end
+
+	def turn_to_place(player)
+		puts "#{player.name}: Place your ships!"
+		5.times {place_ship(player)}
+	end
+
+	def placing_round
+		turn_to_place(player1)
+		turn_to_place(player2)
+	end
+
+
 end
+
+class AlreadyPlaced < Exception ; end
  
