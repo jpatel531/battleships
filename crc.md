@@ -1,4 +1,4 @@
-1. Player
+<!-- 1. Player
 
 Responsibilities:
 
@@ -73,7 +73,7 @@ Collaborators:
 
 - coordinates
 - player
-
+ -->
 
  
 <!-- 4. Game
@@ -99,7 +99,6 @@ Responsibilities:
 - Player cannot place same ship twice
 - Player cannot target same spot twice
 - Player cannot place a ship that's out of boundaries
-- Player cannot place a ship next to his other ship
 - Player cannot place a ship on his other ship
 
 

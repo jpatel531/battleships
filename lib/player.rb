@@ -32,7 +32,7 @@ class Player
 
 	def specified(coordinate, status=:defending)
 		column = coordinate[2].nil? ? coordinate[1] : "#{coordinate[1]}#{coordinate[2]}"
-		raise OutOfBounds.new("Stay on the board bro") if coordinate[0] > "J" || column.to_i > 10
+		return "Stay on the board bro" if coordinate[0] > "J" || column.to_i > 10
 		status == :attacking ? attacking_coordinates.new(coordinate[0],column) : defending_coordinates.new(coordinate[0],column)
 	end
 

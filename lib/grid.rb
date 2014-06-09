@@ -1,4 +1,3 @@
-
 class Grid
 
 	attr_reader :display, :defender, :coordinate_system
@@ -42,10 +41,3 @@ class Grid
 		pretty
 	end
 end
-
-
-
-
-
-
-
