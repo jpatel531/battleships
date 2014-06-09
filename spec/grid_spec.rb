@@ -29,7 +29,7 @@ describe Grid do
 			expect(grid.display[0][0,3]).to eq ["S","S","S"]
 		end
 
-		it "hits" do 
+		it "hits" do
 			opponent.target("A1")
 			grid.mark(:hits)
 			expect(grid.display[0][0]).to eq "H"

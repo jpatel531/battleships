@@ -75,5 +75,30 @@ describe Player do
 	
 	end
 
+	context "rules for playing" do 
+		it "will not allow a player to place the same ship more than once" do 
+			player.place("destroyer", "A1")
+			player.place("destroyer", "D1")
+			destroyer_loc = []
+			player.destroyer.locations.each {|location| destroyer_loc << location.display}
+			expect(destroyer_loc).not_to include "(4,1)"
+		end
+
+		it "will not allow a player to place a ship out of boundaries" do 
+			destroyer_loc = []
+			player.destroyer.locations.each {|location| destroyer_loc << location.display}
+			expect(lambda{player.place("destroyer", "Z11")}).to raise_error
+			expect(destroyer_loc).to be_empty
+		end
+
+		it "will not allow a player to target the same coordinate twice" do 
+			Player2HomeCoordinate.existing_coordinates.clear
+			opponent = Player.new("will", false)
+			opponent.place("destroyer", "C8")
+			player.target("A1")
+			expect(player.target("A1")).to eq "You already hit that bro"
+		end
+	end
+
 
 end

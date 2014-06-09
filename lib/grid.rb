@@ -17,10 +17,10 @@ class Grid
 		end
 	end
 
-	def mark(event)
+	def mark(ship_or_hit)
 		defender.ships.each do |ship|
-			data = (event == :ships) ? ship.locations : ship.hit_locations
-			mark = (event == :ships) ? "S" : "H"
+			data = (ship_or_hit == :ships) ? ship.locations : ship.hit_locations
+			mark = (ship_or_hit == :ships) ? "S" : "H"
 			data.each(&grid_maker(mark))
 		end
 	end

@@ -50,32 +50,19 @@ describe Game do
 			game.turn_to_place("destroyer", "A1")
 		end
 
-		it "will not allow a player to place the same ship more than once" do 
-			game.player1.place("destroyer", "A1")
-			game.player1.place("destroyer", "D1")
-			destroyer_loc = []
-			game.player1.destroyer.locations.each {|location| destroyer_loc << location.display}
-			expect(destroyer_loc).not_to include "(4,1)"
-		end
-
-		it "will not allow a player to place a ship out of boundaries" do 
-			# game.player1.place("destroyer", "Z11")
-			destroyer_loc = []
-			game.player1.destroyer.locations.each {|location| destroyer_loc << location.display}
-			expect(lambda{game.player1.place("destroyer", "Z11")}).to raise_error
-			expect(destroyer_loc).to be_empty
-		end
 	end
 
 	context "targeting ships" do 
 
-		it "allows a to target a ship" do 
-			game.stub(:coordinate).and_return("A1")
-			expect(game.player1).to receive(:target).with("A1")
-			game.target_ships(game.player1)
+		it "allows player2 to target a coordinate after player 1 has done so" do 
+			game.turn_to_target("A1")
+			expect(game.player2).to receive(:target)
+			game.turn_to_target("A1")
 		end
 
+		it "will allow you to retake your turn of you have selected an already targeted ship" do 
 
+		end
 
 	end
 end

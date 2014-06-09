@@ -29,12 +29,14 @@ class Game
 		place_ships(ship, coordinate, orientation="horizontal")
 	end
 
-	def placing_round
-		# loop { turn_to_place  ; switch_player }
+	def target_ships(coordinate)
+		current_player.target(coordinate)
 	end
 
-	def target_ships(player)
-		player.target(coordinate)
+	def turn_to_target(coordinate)
+		target_ships(coordinate)
+		switch_player
+		target_ships(coordinate)
 	end
 
 end

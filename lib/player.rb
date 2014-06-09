@@ -48,9 +48,10 @@ class Player
 	end
 
 	def target(coordinate)
-		attacking_coordinates.existing_coordinates.each do |location| 
+		attacking_coordinates.existing_coordinates.each do |location|
 			location.original_string == coordinate ? location.targeted = true : specified(coordinate, :attacking).targeted = true
 		end
+		return "You already hit that bro" if attacking_coordinates.existing_coordinates.select{|location| location.original_string == coordinate}.count > 2
 	end
 
 end
