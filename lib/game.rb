@@ -1,5 +1,6 @@
 require_relative 'player'
 require_relative 'grid'
+require_relative 'grid_types'
 
 class Game
 
@@ -32,14 +33,23 @@ class Game
 	end
 
 	def place_ship(player)
+		begin
 			player.place(ship, coordinate, orientation)
+		rescue OutOfBounds =>
+			e.message
+		end
+	end
+
+	def turn_to_place(player)
+		place_ship(player) until player.all_deployed?
 	end
 
 	def placing_round
-		place_ship(player1) until player1.all_deployed?
-		# place_ship(player2) until player2.all_deployed?
+		turn_to_place(player1)
+		turn_to_place(player2)
 	end
 
-
 end
+
+class OutOfBounds < Exception ; end
  

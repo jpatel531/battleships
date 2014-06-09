@@ -1,4 +1,3 @@
-require_relative 'game'
 
 class Grid
 
@@ -9,20 +8,8 @@ class Grid
 		@display = Array.new(10).map!{Array.new(10)}
 	end
 
-	def mark_ships
-		defender.ships.each do |ship|
-			ship.locations.each do |location|
-				display[location.row - 1][location.column - 1 ] = "S"
-			end
-		end
-	end
-
 	def unmark_ships
-		display.each do |row|
-			row.map! do |element|
-				element = nil if element == "S"
-			end
-		end
+		display.each {|row| row.map! {|element| element = nil if element == "S"}}
 	end
 
 	def mark_misses
@@ -31,12 +18,16 @@ class Grid
 		end
 	end
 
-	def mark_hits
+	def mark(event)
 		defender.ships.each do |ship|
-			ship.hit_locations.each do |location|
-				display[location.row - 1][location.column - 1] = "H"
-			end
+			data = (event == :ships) ? ship.locations : ship.hit_locations
+			mark = (event == :ships) ? "S" : "H"
+			data.each(&grid_maker(mark))
 		end
+	end
+
+	def grid_maker(mark)
+		Proc.new {|location| self.display[location.row - 1][location.column - 1] = mark }
 	end
 
 	def pretty
@@ -45,24 +36,10 @@ class Grid
 
 	def update_for(viewer)
 		unmark_ships
-		mark_ships if viewer == defender
+		mark(:ships) if viewer == defender
 		mark_misses
-		mark_hits
+		mark(:hits)
 		pretty
-	end
-end
-
-class Player1HomeGrid < Grid 
-	def initialize(defender)
-		super
-		@coordinate_system = Player1HomeCoordinate
-	end
-end
-
-class Player2HomeGrid < Grid
-	def initialize(defender)
-		super
-		@coordinate_system = Player2HomeCoordinate
 	end
 end
 

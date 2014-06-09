@@ -1,5 +1,6 @@
 require 'grid'
 require 'game'
+require 'grid_types'
 
 
 describe Grid do 
@@ -24,13 +25,13 @@ describe Grid do
 		before {player.place("destroyer", "A1")}
 
 		it "location" do 
-			grid.mark_ships
+			grid.mark(:ships)
 			expect(grid.display[0][0,3]).to eq ["S","S","S"]
 		end
 
 		it "hits" do 
 			opponent.target("A1")
-			grid.mark_hits
+			grid.mark(:hits)
 			expect(grid.display[0][0]).to eq "H"
 		end
 	end
@@ -42,6 +43,12 @@ describe Grid do
 			grid.mark_misses
 			expect(grid.display[0][0]).to eq "M"
 		end
+
+		it "won't show a miss by default" do 
+			Player1HomeCoordinate.existing_coordinates.clear
+			grid.update_for player
+			expect(grid.display[0][0]).not_to eq "M"
+		end		
 
 	end
 
