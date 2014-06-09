@@ -2,7 +2,6 @@ class Ship
 
 	attr_accessor :length, :horizontal, :defending_coordinates
 
-	
 	def initialize(length = 3)
 		@length = length
 		@horizontal = true

@@ -1,15 +1,17 @@
 require_relative 'coordinate_tracker'
+require_relative 'coordinate_converter'
 
 module Coordinate
 
 	include CoordinateTracker
+	include CoordinateConverter
 
 	attr_reader :row, :column
 	attr_writer :targeted
 	attr_accessor :has_ship
 
 	def self.included(base)
-			base.extend CoordinateTracker
+		base.extend CoordinateTracker
 	end
 
 	def initialize(row, column)
@@ -17,18 +19,6 @@ module Coordinate
 		@row = (row.is_a? String) ? convert(row) : row
 		@column = column.to_i
 		self.class.existing_coordinates << self
-	end
-
-	def original_string
-		("A".."Z").to_a[self.row - 1] + self.column.to_s
-	end
-
-	def display
-		"(#{row},#{column})"
-	end
-
-	def convert(row)
-		row.to_i(27) - 9
 	end
 
 	def targeted?
