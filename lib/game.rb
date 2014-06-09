@@ -16,28 +16,30 @@ class Game
 		STDIN.gets.chomp
 	end
 
-	def place_ship(player)
+	def ship
 		puts "Which ship would you like to place?"
-		ship = input
-		puts "Where would you like to place it?"
-		coordinate = input
-		puts "horizontal or vertical orientation?"
-		orientation = input
-		player.place(ship, coordinate, orientation)
+		input
 	end
 
-	def turn_to_place(player)
-		puts "#{player.name}: Place your ships!"
-		5.times {place_ship(player)}
+	def coordinate
+		puts "Where would you like to place it?"
+		input
+	end
+
+	def orientation
+		puts "horizontal or vertical orientation?"
+		input
+	end
+
+	def place_ship(player)
+			player.place(ship, coordinate, orientation)
 	end
 
 	def placing_round
-		turn_to_place(player1)
-		turn_to_place(player2)
+		place_ship(player1) until player1.all_deployed?
+		# place_ship(player2) until player2.all_deployed?
 	end
 
 
 end
-
-class AlreadyPlaced < Exception ; end
  

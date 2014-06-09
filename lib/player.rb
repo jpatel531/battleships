@@ -21,6 +21,10 @@ class Player
 		[aircraftcarrier, battleship, destroyer, submarine, tug]
 	end
 
+	def all_deployed?
+		(ships.select {|ship| ship.placed?}).count == 5
+	end
+
 	def chosen(ship)
 		instance_variable_get("@"+ship)
 	end
