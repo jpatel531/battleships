@@ -8,8 +8,8 @@ class Game
 	attr_accessor :current_player
 
 	def initialize
-		@player1 = Player.new("Jamie", true)
-		@player2 = Player.new("John", false)
+		@player1 = Player.new(true)
+		@player2 = Player.new(false)
 		@player1_home_grid = Player1HomeGrid.new(player1)
 		@player2_home_grid = Player2HomeGrid.new(player2)
 		@current_player = player1
@@ -29,7 +29,7 @@ class Game
 		place_ships(ship, coordinate, orientation="horizontal")
 	end
 
-	def target_ships(coordinate)
+	def target_ships
 		current_player.target(coordinate)
 	end
 
@@ -37,10 +37,13 @@ class Game
 		result == "You already hit that bro" || result == "Dench! Go again"
 	end
 
-	def turn_to_target(coordinate)
-		result = target_ships(coordinate)
-		switch_player unless player_has_another_hit?(result)
-		target_ships(coordinate)
+	def coordinate
+		gets.chomp
+	end
+
+	def target_round
+		result = target_ships
+		player_has_another_hit?(result) ? target_round : switch_player
 	end
 
 	def victor

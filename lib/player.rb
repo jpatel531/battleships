@@ -5,10 +5,10 @@ require_relative 'game'
 
 class Player
 
-	attr_reader :name, :aircraftcarrier, :battleship, :destroyer, :submarine, :tug, :defending_coordinates, :attacking_coordinates
+	attr_reader :aircraftcarrier, :battleship, :destroyer, :submarine, :tug, :defending_coordinates, :attacking_coordinates
+	attr_accessor :name
 
-	def initialize(name, player1 = true)
-		@name = name
+	def initialize(player1 = true)
 		@aircraftcarrier = AircraftCarrier.new
 		@battleship = Battleship.new
 		@destroyer = Destroyer.new

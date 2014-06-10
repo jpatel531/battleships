@@ -102,7 +102,7 @@ describe Player do
 
 		it "will not allow a player to target the same coordinate twice" do 
 			Player2HomeCoordinate.existing_coordinates.clear
-			opponent = Player.new("will", false)
+			opponent = Player.new(false)
 			opponent.place("destroyer", "C8")
 			player.target("A1")
 			expect(player.target("A1")).to eq "You already hit that bro"

@@ -57,21 +57,29 @@ describe Game do
 		before {Player2HomeCoordinate.existing_coordinates.clear}
 
 		it "allows player2 to target a coordinate after player 1 has done so" do
-			game.turn_to_target("A1")
-			expect(game.player2).to receive(:target)
-			game.turn_to_target("A1")
+			game.stub(:coordinate).and_return("A1")
+			expect(game).to receive(:switch_player)
+			game.target_round
 		end
 
-		it "if you already hit that you get to retake your go" do 
+		it "if you already targeted it you get to retake your go" do 
+			game.current_player = game.player1
+			game.player2.place("destroyer", "G6")
 			game.player1.target("A1")
-			game.turn_to_target("A1")
-			expect(game.current_player).to eq game.player1
+			game.stub(:coordinate).and_return("A1", "B1")
+			game.target_round
+			b1 = Player2HomeCoordinate.existing_coordinates.select {|location| location.original_string == "B1"}
+			expect(b1).not_to be_empty
 		end
 
 		it "if you have hit a ship, you get another go" do 
+			game.current_player = game.player1
 			game.player2.place("destroyer", "A1")
-			game.turn_to_target("A1")
-			expect(game.current_player).to eq game.player1
+			game.player1.target("A1")
+			game.stub(:coordinate).and_return("B1")
+			game.target_round
+			missed_b1 = Player2HomeCoordinate.existing_coordinates.select {|location| (location.miss?) && (location.original_string == "B1")}
+			expect(missed_b1).not_to be_empty
 		end
 	end
 
