@@ -28,6 +28,7 @@ describe Game do
 
 
 	context "placing ships" do 
+		before(:each) {game.player1.defending_coordinates.existing_coordinates.clear}
 
 		it "stops adding player 1's ships when all his ships are placed" do 
 			game.player1.place("destroyer", "A1") 
@@ -72,6 +73,7 @@ describe Game do
 			game.turn_to_target("A1")
 			expect(game.current_player).to eq game.player1
 		end
-
 	end
+
+
 end

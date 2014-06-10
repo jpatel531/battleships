@@ -3,6 +3,7 @@ require 'ship'
 describe Ship do 
 	let(:ship) {Ship.new() }
 	let(:player) {Player.new("Jamie")}
+	before {player.defending_coordinates.existing_coordinates.clear}
 
 
 	context "when initialized" do 

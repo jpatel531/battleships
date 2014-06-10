@@ -41,14 +41,27 @@ class Player
 	end
 
 	def place(ship, coordinate, orientation="horizontal")
-		set(chosen(ship), orientation)
-		chosen(ship).defending_coordinates = self.defending_coordinates
-		specified(coordinate).hold chosen(ship) unless chosen(ship).placed?
-		chosen(ship).extend_coordinates
+		unless unable_to_place?(ship, coordinate)
+			set(chosen(ship), orientation)
+			chosen(ship).defending_coordinates = self.defending_coordinates
+			specified(coordinate).hold chosen(ship)
+			chosen(ship).extend_coordinates 
+		end
+	end
+
+	def unable_to_place?(ship, coordinate)
+		match = match(coordinate, :defending)
+		chosen(ship).placed? || (!match.nil? && match.has_ship?)
+	end
+
+	def match(coordinate, coordinate_system)
+		grid_to_check = attacking_coordinates if coordinate_system == :attacking
+		grid_to_check = defending_coordinates if coordinate_system == :defending
+		return grid_to_check.existing_coordinates.find {|location| location.original_string == coordinate }
 	end
 
 	def target(coordinate)
-		match = attacking_coordinates.existing_coordinates.find {|location| location.original_string == coordinate }
+		match = match(coordinate, :attacking)
 		return "You already hit that bro" if !match.nil? && match.targeted?
 		match.nil? ? (specified(coordinate, :attacking).targeted = true) : (match.targeted = true)
 		return "Dench! Go again" if !match.nil? && match.hit?

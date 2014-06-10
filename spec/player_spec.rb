@@ -6,6 +6,7 @@ describe Player do
 
 	let(:game) {Game.new}
 	let (:player) {game.player1	}
+	before {player.defending_coordinates.existing_coordinates.clear}
 
 	context "when initialized" do
 
@@ -91,6 +92,12 @@ describe Player do
 			player.destroyer.locations.each {|location| destroyer_loc << location.display}
 			expect(lambda{player.place("destroyer", "Z11")}).to raise_error
 			expect(destroyer_loc).to be_empty
+		end
+
+		it "cannot place a ship on the same spot as another ship" do 
+			player.place("destroyer", "A1")
+			player.place("aircraftcarrier", "A1")
+			expect(player.aircraftcarrier.locations[0].display).not_to eq "(1,1)"
 		end
 
 		it "will not allow a player to target the same coordinate twice" do 
