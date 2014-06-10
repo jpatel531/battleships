@@ -51,6 +51,7 @@ class Player
 		match = attacking_coordinates.existing_coordinates.find {|location| location.original_string == coordinate }
 		return "You already hit that bro" if !match.nil? && match.targeted?
 		match.nil? ? (specified(coordinate, :attacking).targeted = true) : (match.targeted = true)
+		return "Dench! Go again" if !match.nil? && match.hit?
 	end
 
 end

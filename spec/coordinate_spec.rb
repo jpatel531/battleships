@@ -78,6 +78,7 @@ describe Coordinate do
   	a1.hold ship 
   	a1.targeted = true
   	expect(a1).not_to be_miss 
+  	expect(a1).to be_hit
   end
 
   context "Coordinate subclasses" do 

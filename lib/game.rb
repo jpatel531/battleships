@@ -33,9 +33,13 @@ class Game
 		current_player.target(coordinate)
 	end
 
+	def player_has_another_go?(result)
+		result == "You already hit that bro" || result == "Dench! Go again"
+	end
+
 	def turn_to_target(coordinate)
 		result = target_ships(coordinate)
-		switch_player unless result == "You already hit that bro"
+		switch_player unless player_has_another_go?(result)
 		target_ships(coordinate)
 	end
 

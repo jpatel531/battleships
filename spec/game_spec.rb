@@ -68,7 +68,9 @@ describe Game do
 		end
 
 		it "if you have hit a ship, you get another go" do 
-			
+			game.player2.place("destroyer", "A1")
+			game.turn_to_target("A1")
+			expect(game.current_player).to eq game.player1
 		end
 
 	end

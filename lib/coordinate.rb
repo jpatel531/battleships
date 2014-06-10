@@ -34,6 +34,10 @@ module Coordinate
 		@has_ship
 	end
 
+	def hit?
+		targeted? && has_ship
+	end
+
   def miss?
   	targeted? && !has_ship?
   end
