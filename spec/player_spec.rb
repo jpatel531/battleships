@@ -4,7 +4,8 @@ require 'coordinate'
 
 describe Player do
 
-	let (:player) {Player.new("Tron")	}
+	let(:game) {Game.new}
+	let (:player) {game.player1	}
 
 	context "when initialized" do
 
@@ -60,6 +61,7 @@ describe Player do
 
 
 		it "can target a coordinate that already exists" do 
+			Player2HomeCoordinate.existing_coordinates.clear
 			coordinate = Player2HomeCoordinate.new("A","1")
 			player.target("A1")
 			expect(coordinate.targeted?).to be_true
@@ -97,6 +99,13 @@ describe Player do
 			opponent.place("destroyer", "C8")
 			player.target("A1")
 			expect(player.target("A1")).to eq "You already hit that bro"
+		end
+
+		it "does not return the error message by default" do 
+			Player2HomeCoordinate.existing_coordinates.clear
+			opponent = Player.new("will", false)
+			opponent.place("destroyer", "C8")
+			expect(player.target("D9")).not_to eq "You already hit that bro"
 		end
 	end
 

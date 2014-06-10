@@ -7,7 +7,7 @@ describe Grid do
 	let(:game) {Game.new}
 	let(:player) {game.player1}
 	let(:opponent) {game.player2}
-	let(:grid) {Player1HomeGrid.new(game.player1)}
+	let(:grid) {game.player1_home_grid}
 
 	context "when initialized" do
 
@@ -22,7 +22,10 @@ describe Grid do
 	end
 
 	context "can show a ship's" do 
-		before {player.place("destroyer", "A1")}
+		before do 
+			Player1HomeCoordinate.existing_coordinates.clear
+			player.place("destroyer", "A1")
+		end
 
 		it "location" do 
 			grid.mark(:ships)
@@ -30,6 +33,7 @@ describe Grid do
 		end
 
 		it "hits" do
+
 			opponent.target("A1")
 			grid.mark(:hits)
 			expect(grid.display[0][0]).to eq "H"
@@ -37,9 +41,11 @@ describe Grid do
 	end
 
 	context "can show a player's" do 
+		before {Player1HomeCoordinate.existing_coordinates.clear}
 
 		it "misses" do 
-			player.target("A1")
+			player.place("destroyer", "C6")
+			opponent.target("A1")
 			grid.mark_misses
 			expect(grid.display[0][0]).to eq "M"
 		end

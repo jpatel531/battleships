@@ -54,14 +54,17 @@ describe Game do
 
 	context "targeting ships" do 
 
-		it "allows player2 to target a coordinate after player 1 has done so" do 
+		it "allows player2 to target a coordinate after player 1 has done so" do
 			game.turn_to_target("A1")
 			expect(game.player2).to receive(:target)
 			game.turn_to_target("A1")
 		end
 
-		it "will allow you to retake your turn of you have selected an already targeted ship" do 
+		it "if you already hit that " do 
+		end
 
+		it "if you have hit a ship, you get another go" do 
+			
 		end
 
 	end

@@ -33,6 +33,10 @@ class Game
 		current_player.target(coordinate)
 	end
 
+	def has_another_shot
+	end
+
+
 	def turn_to_target(coordinate)
 		target_ships(coordinate)
 		switch_player
