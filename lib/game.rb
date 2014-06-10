@@ -15,18 +15,30 @@ class Game
 		@current_player = player1
 	end
 
+	def coordinate
+		gets.chomp
+	end
+
+	def ship
+		gets.chomp
+	end
+
+	def orientation
+		gets.chomp
+	end
+
 	def switch_player
 		@current_player = (current_player == player1) ? player2 : player1
 	end
 
-	def place_ships(ship, coordinate, orientation="horizontal")
+	def place_ships
 		current_player.place(ship, coordinate, orientation)
 	end
 
-	def turn_to_place(ship, coordinate, orientation="horizontal")
-		place_ships(ship, coordinate, orientation="horizontal") unless current_player.all_deployed?
-		switch_player if current_player.all_deployed?
-		place_ships(ship, coordinate, orientation="horizontal")
+	def turn_to_place
+		place_ships
+		current_player.all_deployed? ? switch_player : turn_to_place
+		place_ships
 	end
 
 	def target_ships
@@ -37,10 +49,6 @@ class Game
 		result == "You already hit that bro" || result == "Dench! Go again"
 	end
 
-	def coordinate
-		gets.chomp
-	end
-
 	def target_round
 		result = target_ships
 		player_has_another_hit?(result) ? target_round : switch_player
@@ -49,7 +57,5 @@ class Game
 	def victor
 		player1.loser? ? player2 : player2.loser? ? player1 : nil
 	end	
-
-
 
 end

@@ -31,24 +31,26 @@ describe Game do
 		before(:each) {game.player1.defending_coordinates.existing_coordinates.clear}
 
 		it "stops adding player 1's ships when all his ships are placed" do 
-			game.player1.place("destroyer", "A1") 
-			game.player1.place("aircraftcarrier", "B1") 
-			game.player1.place("submarine", "C1") 
-			game.player1.place("battleship", "D1") 
-			game.player1.place("tug", "E1")
-			expect(game.player1).not_to receive(:place)
-			game.turn_to_place("battleship", "E1")
+			game.stub(:ship).and_return("aircraftcarrier")
+			game.stub(:coordinate).and_return("E1")
+			game.stub(:orientation).and_return("horizontal")
+			ships = %w(destroyer submarine tug battleship)
+			coordinates = %w(A1 B1 C1 D1)
+			ships.each_with_index { |ship, index| game.player1.place(ship, coordinates[index]) }
+			expect(game).to receive(:switch_player)
+			game.turn_to_place
+			expect(game.player1).to be_all_deployed
 		end
 
-		it "then allows player 2 to place his ships after player 1" do 			
-			puts "Hello"
-			game.player1.place("destroyer", "A1") 
-			game.player1.place("aircraftcarrier", "B1") 
-			game.player1.place("submarine", "C1") 
-			game.player1.place("battleship", "D1") 
-			game.player1.place("tug", "E1")
+		it "then allows player 2 to place his ships after player 1 has done so " do 			
+			game.stub(:ship).and_return("battleship")
+			game.stub(:coordinate).and_return("A1")
+			game.stub(:orientation).and_return(" ")
+			ships = %w(destroyer submarine tug battleship aircraftcarrier)
+			coordinates = %w(A1 B1 C1 D1 E1)
+			ships.each_with_index { |ship, index| game.player1.place(ship, coordinates[index]) }
 			expect(game.player2).to receive(:place)
-			game.turn_to_place("destroyer", "A1")
+			game.turn_to_place
 		end
 
 	end
