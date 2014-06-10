@@ -103,8 +103,7 @@ describe Player do
 
 		it "does not return the error message by default" do 
 			Player2HomeCoordinate.existing_coordinates.clear
-			opponent = Player.new("will", false)
-			opponent.place("destroyer", "C8")
+			game.player2.place("destroyer", "C8")
 			expect(player.target("D9")).not_to eq "You already hit that bro"
 		end
 	end

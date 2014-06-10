@@ -53,6 +53,7 @@ describe Game do
 	end
 
 	context "targeting ships" do 
+		before {Player2HomeCoordinate.existing_coordinates.clear}
 
 		it "allows player2 to target a coordinate after player 1 has done so" do
 			game.turn_to_target("A1")
@@ -60,7 +61,10 @@ describe Game do
 			game.turn_to_target("A1")
 		end
 
-		it "if you already hit that " do 
+		it "if you already hit that you get to retake your go" do 
+			game.player1.target("A1")
+			game.turn_to_target("A1")
+			expect(game.current_player).to eq game.player1
 		end
 
 		it "if you have hit a ship, you get another go" do 

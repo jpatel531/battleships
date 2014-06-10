@@ -33,17 +33,10 @@ class Game
 		current_player.target(coordinate)
 	end
 
-	def has_another_shot
-	end
-
-
 	def turn_to_target(coordinate)
-		target_ships(coordinate)
-		switch_player
+		result = target_ships(coordinate)
+		switch_player unless result == "You already hit that bro"
 		target_ships(coordinate)
 	end
 
 end
-
-class OutOfBounds < Exception ; end
- 
