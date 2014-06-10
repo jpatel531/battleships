@@ -75,5 +75,18 @@ describe Game do
 		end
 	end
 
+	context "finishing the game" do 
+		it "reports a victor" do 
+			Player2HomeCoordinate.existing_coordinates.clear
+			ships = %w(destroyer submarine tug battleship aircraftcarrier)
+			coordinates = %w(A1 B1 C1 D1 E1)
+			ships.each_with_index { |ship, index| game.player2.place(ship, coordinates[index]) }
+			target_co = %w(A1 A2 A3 A4 A5 B1 B2 B3 B4 B5 C1 C2 C3 C4 C5 D1 D2 D3 D4 D5 E1 E2 E3 E4 E5)
+			target_co.each {|co| game.player1.target(co)}
+			expect(game.player2).to be_loser
+			expect(game.victor).to eq game.player1
+		end
+
+	end
 
 end

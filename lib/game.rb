@@ -33,14 +33,20 @@ class Game
 		current_player.target(coordinate)
 	end
 
-	def player_has_another_go?(result)
+	def player_has_another_hit?(result)
 		result == "You already hit that bro" || result == "Dench! Go again"
 	end
 
 	def turn_to_target(coordinate)
 		result = target_ships(coordinate)
-		switch_player unless player_has_another_go?(result)
+		switch_player unless player_has_another_hit?(result)
 		target_ships(coordinate)
 	end
+
+	def victor
+		player1.loser? ? player2 : player2.loser? ? player1 : nil
+	end	
+
+
 
 end
