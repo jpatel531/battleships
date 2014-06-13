@@ -38,7 +38,7 @@ describe Game do
 			coordinates = %w(A1 B1 C1 D1)
 			ships.each_with_index { |ship, index| game.player1.place(ship, coordinates[index]) }
 			expect(game).to receive(:switch_player)
-			game.turn_to_place
+			game.placing_round
 			expect(game.player1).to be_all_deployed
 		end
 
@@ -50,7 +50,7 @@ describe Game do
 			coordinates = %w(A1 B1 C1 D1 E1)
 			ships.each_with_index { |ship, index| game.player1.place(ship, coordinates[index]) }
 			expect(game.player2).to receive(:place)
-			game.turn_to_place
+			game.placing_round
 		end
 
 	end

@@ -87,12 +87,12 @@ describe Player do
 			expect(destroyer_loc).not_to include "(4,1)"
 		end
 
-		it "will not allow a player to place a ship out of boundaries" do 
-			destroyer_loc = []
-			player.destroyer.locations.each {|location| destroyer_loc << location.display}
-			expect(lambda{player.place("destroyer", "Z11")}).to raise_error
-			expect(destroyer_loc).to be_empty
-		end
+		# it "will not allow a player to place a ship out of boundaries" do 
+		# 	destroyer_loc = []
+		# 	player.destroyer.locations.each {|location| destroyer_loc << location.display}
+		# 	expect(lambda{player.place("destroyer", "Z11")}).to raise_error
+		# 	expect(destroyer_loc).to be_empty
+		# end
 
 		it "cannot place a ship on the same spot as another ship" do 
 			player.place("destroyer", "A1")
@@ -112,6 +112,11 @@ describe Player do
 			Player2HomeCoordinate.existing_coordinates.clear
 			game.player2.place("destroyer", "C8")
 			expect(player.target("D9")).not_to eq "You already hit that bro"
+		end
+
+		it "cannot place a ship that will go out of bounds" do 
+			player.place("destroyer", "E10")
+			expect(player.destroyer).not_to be_placed
 		end
 	end
 

@@ -59,7 +59,7 @@ class Player
 
 	def unable_to_place?(ship, coordinate)
 		match = match(coordinate, :defending)
-		chosen(ship).placed? || (!match.nil? && match.has_ship?)
+		chosen(ship).placed? || (!match.nil? && match.has_ship?) || (coordinate[1..2].to_i + chosen(ship).length > 10 )
 	end
 
 	def match(coordinate, coordinate_system)

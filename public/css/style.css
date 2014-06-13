@@ -1,0 +1,45 @@
+html {
+	margin: auto;
+}
+
+
+ body {
+  width:80%;
+  margin-left:auto;
+  margin-right:auto;
+ }
+
+li {
+	font-size: 50px
+}
+
+#vertical {
+	font-size: 100px;
+	text-align: center ;
+}
+
+#horizontal {
+	font-size: 100px;
+	text-align: center ;
+}
+
+
+.element {
+
+	width: 100px;
+	height: 100px;
+	border: 1px solid #000;
+	font-size: 12px;
+	text-align: center
+}
+
+.cell {
+	width: 100px;
+	height: 100px
+}
+
+.cell a {
+	width: 100px;
+	height: 100px;
+	display: block;
+}

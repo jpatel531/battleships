@@ -35,7 +35,7 @@ class Game
 		current_player.place(ship, coordinate, orientation)
 	end
 
-	def turn_to_place
+	def placing_round
 		place_ships
 		current_player.all_deployed? ? switch_player : turn_to_place
 		place_ships
