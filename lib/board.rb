@@ -5,8 +5,11 @@ set :public, Proc.new {File.join(root, '..', "public")}
 enable :sessions
 
 get '/' do 
-	"Hello World"
+	erb :index
 end
+
+post '/' do 
+	
 
 get '/game' do
 	session[:game] ||= Game.new
