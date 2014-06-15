@@ -8,7 +8,7 @@ class Player
 	attr_reader :aircraftcarrier, :battleship, :destroyer, :submarine, :tug, :defending_coordinates, :attacking_coordinates
 	attr_accessor :name
 
-	def initialize(player1 = true)
+	def initialize(name="Bla", player1 = true)
 		@aircraftcarrier = AircraftCarrier.new
 		@battleship = Battleship.new
 		@destroyer = Destroyer.new

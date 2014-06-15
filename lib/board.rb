@@ -23,18 +23,17 @@ post '/' do
 		@player1 = User.new
 		@player1.name = params[:name]
 		@player1.save
-		redirect '/1/wait/'
+		redirect '/wait/'
 	else
 		@player2 = User.new
 		@player2.name = params[:name]
 		@player2.save
-		redirect '/2/game'
+		redirect '/game'
 	end
 end
 
-get '/:num/wait/' do |num|
-	@users = User.all :order => :id.desc
-	redirect "/#{num}/game" if @users.count == 2
+get '/wait/' do |num|
+	redirect "/game" if User.count == 2
 	erb :wait
 end
 
@@ -42,7 +41,7 @@ get '/destroy' do
 	User.destroy
 end
 
-get '/:num/game' do
+get '/game' do
 	session[:num] = params[:num]
 	session[:game] ||= Game.new
 	@game = session[:game]
@@ -53,23 +52,23 @@ get '/:num/game' do
 	erb :board
 end
 
-get '/:num/game/ship/:ship' do 
+get '/game/ship/:ship' do 
 	session[:ship] ||= params[:ship]
-	redirect "/#{params[:num]}/game"
+	redirect "/game"
 end
 
 get '/:num/game/orientation/:orientation' do 
 	session[:orientation] ||= params[:orientation]
-	redirect '/#{params[:num]}/game'
+	redirect '/game'
 end
 
 
 get '/:num/game/coordinate/:coordinate' do 
-	redirect "/#{params[:num]}/game" if session[:ship].nil?
+	redirect "/game" if session[:ship].nil?
 	@game = session[:game]
 	session[:player].place(session[:ship], params[:coordinate], session[:orientation])	
 	session[:grid].update_for(session[:player])
 	session[:ship] = nil
 	session[:orientation] = nil
-	redirect "/#{params[:num]}/game"
+	redirect "/game"
 end

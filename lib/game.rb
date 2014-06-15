@@ -7,9 +7,9 @@ class Game
 	attr_reader :player1, :player2, :player1_home_grid, :player2_home_grid
 	attr_accessor :current_player
 
-	def initialize
-		@player1 = Player.new(true)
-		@player2 = Player.new(false)
+	def initialize(*players)
+		@player1 = Player.new(players[0], true)
+		@player2 = Player.new(players[1], false)
 		@player1_home_grid = Player1HomeGrid.new(player1)
 		@player2_home_grid = Player2HomeGrid.new(player2)
 		@current_player = player1

@@ -38,6 +38,6 @@ class Grid
 		mark(:ships) if viewer == defender
 		mark_misses
 		mark(:hits)
-		pretty
+		# pretty
 	end
 end
