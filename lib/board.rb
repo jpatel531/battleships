@@ -21,7 +21,7 @@ end
 
 post '/' do 
 	session[:count] = session[:count] + 1
-	if session[:count] < 2
+	if User.all.count < 2
 		@player1 = User.new
 		@player1.name = params[:name]
 		@player1.save
@@ -30,16 +30,22 @@ post '/' do
 		@player2 = User.new
 		@player2.name = params[:name]
 		@player2.save
-		redirect '/wait/'
+		redirect '/game'
 	end
 end
 
 get '/wait/' do 
 	@users = User.all :order => :id.desc
+	redirect '/game' if @users.count == 2
 	erb :wait
 end
 
+get '/destroy' do 
+	User.destroy
+end
+
 get '/game' do
+
 	session[:game] ||= Game.new
 	@game = session[:game]
 	erb :board
