@@ -15,28 +15,26 @@ end
 DataMapper.finalize.auto_upgrade! 
 
 get '/' do 
-	session[:count]= 0
 	erb :index
 end
 
 post '/' do 
-	session[:count] = session[:count] + 1
-	if User.all.count < 2
+	if User.count == 0
 		@player1 = User.new
 		@player1.name = params[:name]
 		@player1.save
-		redirect '/wait/'
+		redirect '/1/wait/'
 	else
 		@player2 = User.new
 		@player2.name = params[:name]
 		@player2.save
-		redirect '/game'
+		redirect '/2/game'
 	end
 end
 
-get '/wait/' do 
+get '/:num/wait/' do |num|
 	@users = User.all :order => :id.desc
-	redirect '/game' if @users.count == 2
+	redirect "/#{num}/game" if @users.count == 2
 	erb :wait
 end
 
@@ -44,10 +42,11 @@ get '/destroy' do
 	User.destroy
 end
 
-get '/game' do
-
+get '/:num/game' do
 	session[:game] ||= Game.new
 	@game = session[:game]
+	session[:player] = (params[:num] == 1) ? @game.player1 : @game.player2
+	session[:grid] = (params[:num] == 1) ? @game.player1_home_grid : @game.player2_home_grid
 	erb :board
 end
 
