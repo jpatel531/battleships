@@ -43,30 +43,33 @@ get '/destroy' do
 end
 
 get '/:num/game' do
+	session[:num] = params[:num]
 	session[:game] ||= Game.new
 	@game = session[:game]
 	session[:player] = (params[:num] == 1) ? @game.player1 : @game.player2
+	@player = session[:player]
 	session[:grid] = (params[:num] == 1) ? @game.player1_home_grid : @game.player2_home_grid
+	@grid = session[:grid]
 	erb :board
 end
 
-get '/game/ship/:ship' do 
+get '/:num/game/ship/:ship' do 
 	session[:ship] ||= params[:ship]
-	redirect '/game'
+	redirect "/#{params[:num]}/game"
 end
 
-get '/game/orientation/:orientation' do 
+get '/:num/game/orientation/:orientation' do 
 	session[:orientation] ||= params[:orientation]
-	redirect '/game'
+	redirect '/#{params[:num]}/game'
 end
 
 
-get '/game/coordinate/:coordinate' do 
-	redirect '/game' if session[:ship].nil?
+get '/:num/game/coordinate/:coordinate' do 
+	redirect "/#{params[:num]}/game" if session[:ship].nil?
 	@game = session[:game]
-	@game.player1.place(session[:ship], params[:coordinate], session[:orientation])	
-	@game.player1_home_grid.update_for(@game.player1)
+	session[:player].place(session[:ship], params[:coordinate], session[:orientation])	
+	session[:grid].update_for(session[:player])
 	session[:ship] = nil
 	session[:orientation] = nil
-	redirect '/game'
+	redirect "/#{params[:num]}/game"
 end

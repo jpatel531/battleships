@@ -8,29 +8,29 @@
 
 <section id="shipchoice">
 <ul>
-	<li><a href="/game/ship/aircraftcarrier">Aircraft Carrier</a></li>
-	<li><a href="/game/ship/battleship">Battleship</a></li>
-	<li><a href="/game/ship/destroyer">Destroyer</a></li>
-	<li><a href="/game/ship/submarine">Submarine</a></li>
-	<li><a href="/game/ship/tug">Tug</a></li>
+	<li><a href="/<%= session[:num]%>/game/ship/aircraftcarrier">Aircraft Carrier</a></li>
+	<li><a href="/<%= session[:num]%>/game/ship/battleship">Battleship</a></li>
+	<li><a href="/<%= session[:num]%>/game/ship/destroyer">Destroyer</a></li>
+	<li><a href="/<%= session[:num]%>/game/ship/submarine">Submarine</a></li>
+	<li><a href="/<%= session[:num]%>/game/ship/tug">Tug</a></li>
 </ul>
 </section>
 
 <section id="orientation">
-	<a id="vertical" href="/game/orientation/vertical"> &#x2191; </a><br>
-	<a id="horizontal" href="/game/orientation/horizontal"> &#x2192; </a>
+	<a id="vertical" href="/<%= session[:num]%>/game/orientation/vertical"> &#x2191; </a><br>
+	<a id="horizontal" href="/<%= session[:num]%>/game/orientation/horizontal"> &#x2192; </a>
 </section>
 
 
 <table id="grid">
-<% @game.player1_home_grid.display.each_with_index do |row, index| %>
+<% session[:grid].display.each_with_index do |row, index| %>
 	<% row_name = ("A".."Z").to_a[index] %>
 	<tr class="<%=row_name%>"> 
 		<% row.each_with_index do |element, index| %>
 
 			<% column_number = (index + 1).to_s %>
 
-			<td class="element" bgcolor="<%= "#D6EBFF" if element.nil? %>"><div class="cell"><a href="/game/coordinate/<%=row_name + column_number%>"></a></div></td>
+			<td class="element" bgcolor="<%= "#D6EBFF" if element.nil? %>"><div class="cell"><a href="/<%= session[:num]%>/game/coordinate/<%=row_name + column_number%>"></a></div></td>
 
 			<% end %>
 			<br>
