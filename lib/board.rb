@@ -18,17 +18,16 @@ class PlayTime
 	property :id, Serial
 	property :name, Text
 	property :game, Object
-	property :player1, Object
-	property :player2, Object
-	property :player1grid, Object
-	property :player2grid, Object
+	property :turn, Integer, default: 1
+	property :p1targets, Text
+	property :p2targets, Text
 end
 
 DataMapper.finalize.auto_upgrade! 
 
 get '/' do 
+	redirect '/game' if !session[:player].nil?
 	erb :index
-	
 end
 
 post '/' do 
@@ -44,7 +43,7 @@ post '/' do
 end
 
 get '/wait/' do
-	redirect "/game" if User.count == 2
+	redirect '/success/' if User.count == 2
 	erb :wait
 end
 
@@ -63,15 +62,26 @@ get '/success/' do
 		session[:player] = @game.player2
 		session[:opponent] = @game.player1
 	end
-
 	redirect '/game'
 end
 
 get '/destroy' do 
 	User.destroy
+	PlayTime.destroy
+	session.clear
 end
 
 get '/game' do
+	play = PlayTime.first(name: 'Hello')
+	if !play.p1targets.nil? || !play.p2targets.nil?
+		if session[:number] == 1
+			session[:opponent].target(play.p2targets)
+		elsif session[:number] == 2
+			session[:opponent].target(play.p1targets)
+		end
+	session[:targetgrid].update_for(session[:player])
+	end
+	session[:turn] = play.turn
 	erb :board
 end
 
@@ -85,7 +95,7 @@ get '/game/orientation/:orientation' do
 	redirect '/game'
 end
 
-get '/game/coordinate/:coordinate' do 
+get '/game/place/:coordinate' do 
 	@game = session[:game]
 	redirect '/game' if session[:ship].nil?
 	session[:player].place(session[:ship], params[:coordinate], session[:orientation])	
@@ -94,3 +104,29 @@ get '/game/coordinate/:coordinate' do
 	session[:orientation] = nil
 	redirect '/game'
 end
+
+get '/game/target/:coordinate' do 
+	play = PlayTime.first(name: 'Hello')
+	if session[:number] == 1 && play.turn == 1 && session[:player].all_deployed?
+		play.p1targets = params[:coordinate]
+		play.turn = 2
+		play.save
+	elsif session[:number] == 2 && play.turn == 2 && session[:player].all_deployed?
+		play.p2targets = params[:coordinate]
+		play.turn = 1
+		play.save
+	end
+	redirect '/game'
+end
+
+
+
+
+
+
+
+
+
+
+
+

@@ -31,7 +31,7 @@
 
 			<% column_number = (index + 1).to_s %>
 
-			<td class="element" bgcolor="<%= "#D6EBFF" if element.nil? %>"><div class="cell"><a href="/game/coordinate/<%=row_name + column_number%>"></a></div></td>
+			<td class="element" bgcolor="<%= "#D6EBFF" if element.nil? %>"><div class="cell"><a href="/game/place/<%=row_name + column_number%>"></a></div></td>
 
 			<% end %>
 			<br>
@@ -39,7 +39,9 @@
 <% end %>
 </table>
 
-<% if session[:player].all_deployed?%>
+<p> It is the turn of player <%= session[:turn] %> </p>
+
+
 	<table id="target">
 	<% session[:targetgrid].display.each_with_index do |row, index| %>
 		<% row_name = ("A".."Z").to_a[index] %>
@@ -48,14 +50,14 @@
 
 				<% column_number = (index + 1).to_s %>
 
-				<td class="element" bgcolor="<%= "#D6EBFF" if element.nil? %>"><div class="cell"><a href="/game/coordinate/<%=row_name + column_number%>"></a></div></td>
+				<td class="element" bgcolor="<%= "#D6EBFF" if element.nil? %>"><div class="cell"><a href="/game/target/<%=row_name + column_number%>"></a></div></td>
 
 				<% end %>
 				<br>
 		</tr>
 	<% end %>
 	</table>
-<% end %>
+
 
 
 
