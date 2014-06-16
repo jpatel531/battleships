@@ -50,6 +50,12 @@ end
 
 get '/success/' do 
 	play = PlayTime.create(:name => 'Hello', :game => Game.new)
+	session[:game] = play.game
+	@game = session[:game] 
+	session[:homegrid] = @game.player1_home_grid if session[:number] == 1
+	session[:homegrid] = @game.player2_home_grid if session[:number] == 2
+	session[:player] = @game.player1 if session[:number] == 1
+	session[:player] = @game.player2 if session[:number] == 2
 	redirect '/game'
 end
 
@@ -59,9 +65,7 @@ end
 
 get '/game' do
 	play = PlayTime.first(:name =>'Hello')
-	@homegrid = play.game.player1_home_grid if session[:number] == 1
-	@homegrid = play.game.player2_home_grid if session[:number] == 2
-	puts @homegrid.pretty
+	puts session[:homegrid].pretty
 	erb :board
 end
 
@@ -75,21 +79,12 @@ get '/game/orientation/:orientation' do
 	redirect '/game'
 end
 
-
 get '/game/coordinate/:coordinate' do 
-	play = PlayTime.first(:name => 'Hello')
+	@game = session[:game]
 	redirect '/game' if session[:ship].nil?
-	if session[:number] == 1
-		play.game.player1.place(session[:ship], params[:coordinate], session[:orientation])	
-		play.game.player1_home_grid.update_for(play.game.player1)
-		puts play.game.player1_home_grid.pretty
-		play.save
-	else
-		play.game.player2.place(session[:ship], params[:coordinate], session[:orientation])
-		play.game.player2_home_grid.update_for(play.game.player2)
-		puts play.game.player2_home_grid.pretty
-		play.save
-	end
+	session[:player].place(session[:ship], params[:coordinate], session[:orientation])	
+	session[:homegrid].update_for(session[:player])
+	puts session[:homegrid].pretty
 	session[:ship] = nil
 	session[:orientation] = nil
 	redirect '/game'

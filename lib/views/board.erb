@@ -24,7 +24,7 @@
 
 
 <table id="homegrid">
-<% @homegrid.display.each_with_index do |row, index| %>
+<% session[:homegrid].display.each_with_index do |row, index| %>
 	<% row_name = ("A".."Z").to_a[index] %>
 	<tr class="<%=row_name%>"> 
 		<% row.each_with_index do |element, index| %>
