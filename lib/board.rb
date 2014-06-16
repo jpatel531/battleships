@@ -51,11 +51,19 @@ end
 get '/success/' do 
 	play = PlayTime.create(:name => 'Hello', :game => Game.new)
 	session[:game] = play.game
-	@game = session[:game] 
-	session[:homegrid] = @game.player1_home_grid if session[:number] == 1
-	session[:homegrid] = @game.player2_home_grid if session[:number] == 2
-	session[:player] = @game.player1 if session[:number] == 1
-	session[:player] = @game.player2 if session[:number] == 2
+	@game = session[:game]
+	if session[:number] == 1
+		session[:homegrid] = @game.player1_home_grid
+		session[:targetgrid] = @game.player2_home_grid
+		session[:player] = @game.player1
+		session[:opponent] = @game.player2
+	elsif session[:number] == 2
+		session[:homegrid] = @game.player2_home_grid
+		session[:targetgrid] = @game.player1_home_grid
+		session[:player] = @game.player2
+		session[:opponent] = @game.player1
+	end
+
 	redirect '/game'
 end
 
@@ -64,8 +72,6 @@ get '/destroy' do
 end
 
 get '/game' do
-	play = PlayTime.first(:name =>'Hello')
-	puts session[:homegrid].pretty
 	erb :board
 end
 
@@ -84,7 +90,6 @@ get '/game/coordinate/:coordinate' do
 	redirect '/game' if session[:ship].nil?
 	session[:player].place(session[:ship], params[:coordinate], session[:orientation])	
 	session[:homegrid].update_for(session[:player])
-	puts session[:homegrid].pretty
 	session[:ship] = nil
 	session[:orientation] = nil
 	redirect '/game'
