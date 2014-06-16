@@ -6,6 +6,7 @@
 
 <body>
 
+
 <section id="shipchoice">
 <ul>
 	<li><a href="/game/ship/aircraftcarrier">Aircraft Carrier</a></li>
@@ -23,7 +24,7 @@
 
 
 <table id="homegrid">
-<% session[:homegrid].display.each_with_index do |row, index| %>
+<% @homegrid.display.each_with_index do |row, index| %>
 	<% row_name = ("A".."Z").to_a[index] %>
 	<tr class="<%=row_name%>"> 
 		<% row.each_with_index do |element, index| %>
@@ -38,21 +39,7 @@
 <% end %>
 </table>
 
-<table id="targetgrid">
-<% session[:targetgrid].display.each_with_index do |row, index| %>
-	<% row_name = ("A".."Z").to_a[index] %>
-	<tr class="<%=row_name%>"> 
-		<% row.each_with_index do |element, index| %>
 
-			<% column_number = (index + 1).to_s %>
-
-			<td class="element" bgcolor="<%= "#D6EBFF" if element.nil? %>"><div class="cell"><a href="/game/coordinate/<%=row_name + column_number%>"></a></div></td>
-
-			<% end %>
-			<br>
-	</tr>
-<% end %>
-</table>
 
 
 
