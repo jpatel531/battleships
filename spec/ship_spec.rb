@@ -19,7 +19,7 @@ describe Ship do
 		end
 
 		it "is horizontal by default" do 
-			expect(ship.horizontal?).to be_true
+			expect(ship.horizontal?).to be_truthy
 		end
 
 	end
@@ -85,7 +85,7 @@ describe Ship do
 			A2 = double :A2, targeted?: true
 			A3 = double :A3, targeted?: true
 			ship.locations << A1 ; ship.locations << A2 ; ship.locations << A3
-			expect(ship.sunk?).to be_true
+			expect(ship.sunk?).to be_truthy
 		end
 	end
 end

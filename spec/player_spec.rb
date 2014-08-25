@@ -47,7 +47,7 @@ describe Player do
 			ship = player.submarine
 			orientation = "vertical"
 			player.set(ship, orientation)
-			expect(ship.horizontal?).to be_false
+			expect(ship.horizontal?).to be_falsey
 		end
 	end
 
@@ -65,7 +65,7 @@ describe Player do
 			Player2HomeCoordinate.existing_coordinates.clear
 			coordinate = Player2HomeCoordinate.new("A","1")
 			player.target("A1")
-			expect(coordinate.targeted?).to be_true
+			expect(coordinate.targeted?).to be_truthy
 		end
 
 		it "can target a coordinate that doesn't exist" do 

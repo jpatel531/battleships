@@ -6,7 +6,7 @@ describe Coordinate do
 	let(:ship) {Ship.new}
 
 	it "is untargeted when initialized" do 
-		expect(coordinate.targeted?).to be_false
+		expect(coordinate.targeted?).to be_falsey
 	end
 
 	it "has a row and column when initialized" do
